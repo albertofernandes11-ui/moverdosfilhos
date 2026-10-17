@@ -307,6 +307,27 @@ a.link-card:hover { border-color: var(--gold); }
 @media (max-width: 900px) { .products { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .store-head { grid-template-columns: 1fr; gap: 20px; } .store-logo { width: 120px; } }
 
+/* botão de música de fundo */
+.music-btn {
+  position: fixed; z-index: 20;
+  right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #F2EADC; background: #0E0C09; border: 1.5px solid #D9A85B; border-radius: 999px;
+  padding: 12px 18px 12px 14px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.music-btn:hover { background: #1F1810; }
+.music-btn svg { width: 22px; height: 22px; color: #D9A85B; flex: none; }
+.music-btn .bars { display: none; align-items: flex-end; gap: 3px; height: 16px; }
+.music-btn .bars i { width: 3px; background: #D9A85B; border-radius: 2px; height: 30%; animation: eq 0.9s ease-in-out infinite; }
+.music-btn .bars i:nth-child(2) { animation-delay: 0.2s; }
+.music-btn .bars i:nth-child(3) { animation-delay: 0.4s; }
+.music-btn.playing .bars { display: inline-flex; }
+.music-btn.playing .note { display: none; }
+@keyframes eq { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+@media (prefers-reduced-motion: reduce) { .music-btn .bars i { animation: none; height: 70%; } }
+@media (max-width: 480px) { .music-btn .label { display: none; } .music-btn { padding: 12px; } }
+
 footer { border-top: 1px solid var(--line); }
 footer .wrap { padding-block: 34px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; color: var(--muted); font-size: 14px; }
 footer img { height: 54px; width: auto; }
@@ -597,7 +618,46 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
   </div>
 </footer>
 
+<audio id="trilha" src="audio/trilha.mp3" loop preload="none"></audio>
+<button class="music-btn" id="music-btn" type="button" aria-pressed="false" aria-label="Tocar música de fundo">
+  <svg class="note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="label">Ouvir música</span>
+</button>
+
 <script>
+  // Música de fundo: só toca quando a pessoa pede (navegadores bloqueiam som automático).
+  (function () {
+    var audio = document.getElementById("trilha");
+    var btn = document.getElementById("music-btn");
+    var video = document.querySelector("#video video");
+    if (!audio || !btn) return;
+    var target = 0.35, fadeTimer = null;
+    function setUi(on) {
+      btn.classList.toggle("playing", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.setAttribute("aria-label", on ? "Pausar música de fundo" : "Tocar música de fundo");
+      btn.querySelector(".label").textContent = on ? "Pausar música" : "Ouvir música";
+    }
+    function fadeTo(v, done) {
+      clearInterval(fadeTimer);
+      fadeTimer = setInterval(function () {
+        var d = v - audio.volume;
+        if (Math.abs(d) < 0.02) { audio.volume = v; clearInterval(fadeTimer); if (done) done(); return; }
+        audio.volume = Math.max(0, Math.min(1, audio.volume + d * 0.15));
+      }, 50);
+    }
+    function play() {
+      audio.volume = 0;
+      var p = audio.play();
+      if (p && p.then) p.then(function () { setUi(true); fadeTo(target); }, function () { setUi(false); });
+      else { setUi(true); fadeTo(target); }
+    }
+    function pause() { fadeTo(0, function () { audio.pause(); }); setUi(false); }
+    btn.addEventListener("click", function () { if (audio.paused || !btn.classList.contains("playing")) play(); else pause(); });
+    if (video) video.addEventListener("play", function () { if (!audio.paused) pause(); });
+  })();
+
   (function () {
     var btn = document.getElementById("copiar");
     var addr = document.getElementById("endereco");
