@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mover dos Filhos</title>
+<meta property="og:title" content="Mover dos Filhos">
+<meta property="og:description" content="Uma casa, um altar, um mover. Conheça o Mover dos Filhos e o The House.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E0C09">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Mover dos Filhos — The House: uma casa, um altar, um mover. Oração, presença, dons e ativação nas casas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<style>
+/* Layout: página creme como o flyer, com faixas escuras de "altar" (abertura, vídeo, versículo) e texto alinhado à esquerda nas seções. */
+:root {
+  --bg: #F5EFE4;          /* creme do flyer */
+  --surface: #EDE4D4;     /* creme mais fundo */
+  --fg: #141210;          /* tinta */
+  --muted: #5B5248;
+  --gold: #A8732F;        /* dourado para texto sobre creme */
+  --gold-soft: #D9A85B;   /* dourado sobre escuro */
+  --line: #CDB892;
+  --band: #0E0C09;        /* faixas escuras */
+  --band-fg: #F2EADC;
+  --band-muted: #BFB29C;
+  --medal: #F5EFE4;       /* fundo dos ícones */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Montserrat", "Segoe UI", Helvetica, Arial, sans-serif;
+  --wrap: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15120E; --surface: #1F1A14; --fg: #F2EADC; --muted: #BFB29C;
+    --gold: #D9A85B; --gold-soft: #E3B86E; --line: #4A3C28;
+    --band: #0A0806; --band-fg: #F2EADC; --band-muted: #BFB29C; --medal: #EDE4D4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15120E; --surface: #1F1A14; --fg: #F2EADC; --muted: #BFB29C;
+  --gold: #D9A85B; --gold-soft: #E3B86E; --line: #4A3C28;
+  --band: #0A0806; --band-fg: #F2EADC; --band-muted: #BFB29C; --medal: #EDE4D4;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg);
+}
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.08; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.eyebrow {
+  font-family: var(--font-body); font-weight: 600; font-size: 13px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold);
+}
+.rule { display: flex; align-items: center; gap: 18px; }
+.rule::before, .rule::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+
+/* logos: versão clara/escura conforme o tema */
+.logo-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .logo-light { display: none; }
+  :root:not([data-theme="light"]) .logo-dark { display: block; }
+}
+:root[data-theme="dark"] .logo-light { display: none; }
+:root[data-theme="dark"] .logo-dark { display: block; }
+
+/* topo */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+.top img { height: 50px; width: auto; }
+.top nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: flex-end; }
+.top nav a {
+  text-decoration: none; font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted);
+}
+.top nav a:hover { color: var(--gold); }
+@media (max-width: 760px) { .top nav { display: none; } }
+
+/* abertura (faixa escura) */
+.hero { background: var(--band); color: var(--band-fg); position: relative; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: -20% 0 auto; height: 120%;
+  background: radial-gradient(ellipse at 50% 30%, rgba(217,168,91,0.28), transparent 60%);
+  pointer-events: none;
+}
+.hero .wrap { position: relative; padding-block: 72px 80px; display: grid; justify-items: center; text-align: center; gap: 28px; }
+.hero-parent { display: grid; justify-items: center; gap: 12px; }
+.hero-parent img { height: 150px; width: auto; }
+@media (max-width: 480px) { .hero-parent img { height: 120px; } }
+.hero-parent span { font-size: 12px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--band-muted); }
+.hero-sep { width: 1px; height: 34px; background: var(--gold-soft); opacity: 0.6; }
+.hero-logo { width: min(400px, 78%); height: auto; }
+.arm-tag {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px 10px; align-items: center;
+  border: 1px solid rgba(217,168,91,0.5); border-radius: 999px; padding: 8px 18px;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--band-fg);
+}
+.arm-tag b { color: var(--gold-soft); font-weight: 600; }
+.arm-tag i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-soft); display: inline-block; }
+.hero h1 { font-size: clamp(44px, 8vw, 96px); letter-spacing: -0.02em; }
+.hero h1 .l2 { color: var(--gold-soft); display: block; }
+.hero h1 .l3 { font-style: italic; display: block; }
+.hero h1 .l1 { display: block; }
+.pillars-line { font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--band-muted); max-width: 100%; }
+.pillars-line b { color: var(--gold-soft); font-weight: 400; padding: 0 6px; }
+@media (max-width: 480px) { .pillars-line { font-size: 12px; letter-spacing: 0.2em; } }
+.hero .lead { max-width: 58ch; color: var(--band-muted); font-size: 18px; }
+.ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 15px 26px; border-radius: 3px; border: 1.5px solid var(--gold-soft);
+  cursor: pointer; font-family: var(--font-body);
+}
+.btn-solid { background: var(--gold-soft); color: #141210; }
+.btn-solid:hover { background: var(--band-fg); border-color: var(--band-fg); }
+.btn-ghost { background: transparent; color: var(--band-fg); }
+.btn-ghost:hover { background: rgba(217,168,91,0.15); }
+
+section { padding-block: 88px; }
+@media (max-width: 600px) { section { padding-block: 60px; } }
+
+/* quem somos */
+.about { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.about > * { min-width: 0; }
+.about h2 { font-size: clamp(34px, 4.6vw, 54px); margin-top: 14px; }
+.about h2 em { color: var(--gold); }
+.about .text { display: grid; gap: 18px; color: var(--muted); }
+.about .text p:first-of-type { color: var(--fg); font-size: 19px; }
+.photo { position: relative; }
+.photo img { width: 100%; height: auto; display: block; border-radius: 2px; }
+.photo figcaption { font-size: 13px; color: var(--muted); margin-top: 10px; letter-spacing: 0.04em; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 36px; } }
+
+/* the house */
+.house { background: var(--surface); }
+.house-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
+.house-grid > * { min-width: 0; }
+.house h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
+.house .intro { display: grid; gap: 16px; color: var(--muted); }
+.house .intro p:first-child { color: var(--fg); }
+.where { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.where li {
+  list-style: none; display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start;
+  padding-block: 22px; border-bottom: 1px solid var(--line);
+}
+.where ul { margin: 0; padding: 0; }
+.where svg { width: 40px; height: 40px; color: var(--gold); }
+.where h3 { font-size: 22px; margin-bottom: 4px; }
+.where p { color: var(--muted); }
+@media (max-width: 860px) { .house-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+/* pilares */
+.pillars-head { display: grid; gap: 12px; max-width: 640px; margin-bottom: 44px; }
+.pillars-head h2 { font-size: clamp(32px, 4.2vw, 50px); }
+.pillars { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.pillar { padding: 34px 22px 30px; display: grid; gap: 10px; align-content: start; justify-items: center; text-align: center; }
+.pillar + .pillar { border-left: 1px solid var(--line); }
+.medal { width: 112px; height: 112px; border-radius: 50%; background: var(--medal); display: grid; place-items: center; }
+.medal img { width: 84px; height: auto; mix-blend-mode: multiply; }
+.pillar h3 { font-family: var(--font-body); font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-top: 8px; }
+.pillar p { color: var(--muted); font-size: 16px; max-width: 22ch; }
+@media (max-width: 860px) {
+  .pillars { grid-template-columns: repeat(2, 1fr); }
+  .pillar:nth-child(3) { border-left: 0; }
+  .pillar:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 440px) {
+  .pillars { grid-template-columns: 1fr; }
+  .pillar + .pillar { border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* objetivos */
+.goals { background: var(--surface); }
+.goals-grid { display: grid; grid-template-columns: 0.9fr 1.3fr; gap: 56px; }
+.goals-grid > * { min-width: 0; }
+.goals h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
+.goals ol { margin: 0; padding: 0; counter-reset: g; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.goals li {
+  list-style: none; counter-increment: g; display: grid; grid-template-columns: 64px 1fr; gap: 16px;
+  padding-block: 22px; border-bottom: 1px solid var(--line);
+}
+.goals li::before {
+  content: counter(g, decimal-leading-zero); font-family: var(--font-display); font-style: italic;
+  font-size: 30px; color: var(--gold); line-height: 1.1;
+}
+.goals li strong { display: block; font-family: var(--font-display); font-size: 22px; margin-bottom: 4px; }
+.goals li span { color: var(--muted); }
+@media (max-width: 860px) { .goals-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+/* vídeo (faixa escura) */
+.film { background: var(--band); color: var(--band-fg); }
+.film-grid { display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: center; }
+.film-grid > * { min-width: 0; }
+.film .eyebrow { color: var(--gold-soft); }
+.film h2 { font-size: clamp(32px, 4.4vw, 54px); margin-block: 14px 18px; }
+.film h2 em { color: var(--gold-soft); }
+.film p { color: var(--band-muted); max-width: 46ch; }
+.film video {
+  width: 100%; max-width: 380px; aspect-ratio: 9 / 16; height: auto; display: block;
+  background: #000; border-radius: 6px; justify-self: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(217,168,91,0.25);
+}
+@media (max-width: 860px) { .film-grid { grid-template-columns: 1fr; gap: 36px; } .film video { max-width: 340px; } }
+
+/* próximo encontro */
+.meet-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: center; }
+.meet-grid > * { min-width: 0; }
+.meet h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
+.date-card { margin-top: 34px; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; padding-block: 26px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.date-big { text-align: center; padding-right: 28px; border-right: 1px solid var(--line); }
+.date-big .wd { font-size: 12px; font-weight: 600; letter-spacing: 0.26em; color: var(--gold); }
+.date-big .d { font-family: var(--font-display); font-weight: 700; font-size: 84px; line-height: 1; font-variant-numeric: lining-nums; }
+.date-big .m { font-size: 14px; font-weight: 600; letter-spacing: 0.3em; }
+.date-info { display: grid; gap: 12px; }
+.date-info .row { display: flex; gap: 12px; align-items: flex-start; }
+.date-info svg { width: 22px; height: 22px; color: var(--gold); flex: none; margin-top: 3px; }
+.date-info .time { font-family: var(--font-display); font-size: 30px; font-weight: 700; line-height: 1.1; font-variant-numeric: lining-nums; }
+.copy {
+  margin-top: 6px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; background: none; color: var(--gold); border: 1px solid var(--line);
+  padding: 8px 14px; border-radius: 3px; cursor: pointer;
+}
+.copy:hover { border-color: var(--gold); }
+.meet .note { margin-top: 22px; color: var(--muted); }
+.invite img { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto; border-radius: 4px; box-shadow: 0 20px 50px rgba(20,18,16,0.18); }
+@media (max-width: 860px) { .meet-grid { grid-template-columns: 1fr; gap: 40px; } }
+@media (max-width: 480px) {
+  .date-card { grid-template-columns: 1fr; gap: 18px; }
+  .date-big { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+}
+
+/* versículo */
+.verse { background: var(--band); color: var(--band-fg); text-align: center; }
+.verse blockquote { margin: 0 auto; max-width: 26ch; font-family: var(--font-display); font-style: italic; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.25; }
+.verse blockquote::before { content: "“"; display: block; color: var(--gold-soft); font-size: 1.8em; line-height: 0.6; margin-bottom: 18px; font-style: normal; }
+.verse cite { display: block; margin-top: 26px; font-style: normal; font-size: 13px; letter-spacing: 0.3em; color: var(--gold-soft); }
+
+/* redes / contato */
+.connect { text-align: center; }
+.connect h2 { font-size: clamp(32px, 4.4vw, 54px); margin-block: 14px 16px; }
+.connect h2 em { color: var(--gold); }
+.connect .sub { color: var(--muted); max-width: 54ch; margin: 0 auto; }
+.links { margin-top: 38px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 900px; margin-inline: auto; }
+.link-card {
+  display: grid; gap: 6px; justify-items: center; padding: 28px 18px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 4px; background: var(--bg);
+}
+a.link-card:hover { border-color: var(--gold); }
+.link-card svg { width: 30px; height: 30px; color: var(--gold); }
+.link-card strong { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; }
+.link-card span { color: var(--muted); font-size: 15px; }
+@media (max-width: 700px) { .links { grid-template-columns: 1fr; } }
+.manifesto {
+  margin: 56px auto 0; display: inline-block; border: 1.5px solid var(--gold); padding: 18px 40px;
+  font-size: 14px; letter-spacing: 0.32em; line-height: 1.9; text-transform: uppercase;
+}
+.manifesto b { color: var(--gold); font-weight: 600; }
+
+/* move store (em breve) */
+.store { background: var(--surface); }
+.store-head { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; margin-bottom: 44px; }
+.store-head > * { min-width: 0; }
+.store-logo { width: 150px; height: auto; }
+.store h2 { font-size: clamp(32px, 4.4vw, 54px); margin-block: 12px 14px; }
+.store h2 em { color: var(--gold); }
+.store .sub { color: var(--muted); max-width: 58ch; }
+.soon { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--gold); border-radius: 999px; padding: 6px 14px; }
+.products { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.product { margin: 0; position: relative; display: grid; gap: 10px; }
+.product .pic { position: relative; border-radius: 4px; overflow: hidden; aspect-ratio: 3 / 4; background: #e9e6e1; }
+.product img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.product .pic .soon { position: absolute; top: 12px; left: 12px; font-size: 10.5px; padding: 5px 11px; }
+.product figcaption strong { display: block; font-size: 15px; font-weight: 600; }
+.product figcaption span { color: var(--muted); font-size: 14px; }
+.store .follow { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; color: var(--muted); }
+.store .follow b { color: var(--fg); font-size: 18px; letter-spacing: 0.04em; }
+@media (max-width: 900px) { .products { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .store-head { grid-template-columns: 1fr; gap: 20px; } .store-logo { width: 120px; } }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 34px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; color: var(--muted); font-size: 14px; }
+footer img { height: 54px; width: auto; }
+footer .brand { display: flex; align-items: center; gap: 16px; }
+footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+/* estrutura: projeto principal e braços */
+.family { margin-top: 34px; border: 1px solid var(--line); border-radius: 4px; padding: 22px 24px; display: grid; gap: 16px; background: var(--surface); }
+.family .label { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.family .root { display: flex; align-items: center; gap: 16px; }
+.family .root img { height: 64px; width: auto; }
+.family .root strong { font-family: var(--font-display); font-size: 22px; display: block; }
+.family .root span { color: var(--muted); font-size: 15px; }
+.family .branch { display: flex; align-items: center; gap: 16px; padding-left: 30px; position: relative; flex-wrap: wrap; }
+.family .branch::before { content: ""; position: absolute; left: 10px; top: -16px; bottom: 50%; width: 14px; border-left: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); }
+.family .branch img { height: 46px; width: auto; }
+.family .badge { font-size: 11.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 4px 12px; }
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a href="#inicio" aria-label="Mover dos Filhos — início">
+      <img class="logo-light" src="img/mover_claro.png" alt="Mover dos Filhos">
+      <img class="logo-dark" src="img/mover_escuro.png" alt="Mover dos Filhos">
+    </a>
+    <nav aria-label="Seções">
+      <a href="#quem-somos">Quem somos</a>
+      <a href="#the-house">The House</a>
+      <a href="#pilares">Pilares</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#encontro">Próximo encontro</a>
+      <a href="#move-store">Move Store</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-parent">
+        <img src="img/mover_escuro.png" alt="Mover dos Filhos">
+        <span>apresenta</span>
+      </div>
+      <div class="hero-sep" aria-hidden="true"></div>
+      <img class="hero-logo" src="img/thehouse_escuro.png" alt="The House (A Casa)">
+      <p class="arm-tag"><span>Um braço do <b>Mover dos Filhos</b></span><i aria-hidden="true"></i><span>Começando agora</span></p>
+      <h1><span class="l1">Uma casa,</span><span class="l2">um altar,</span><span class="l3">um mover.</span></h1>
+      <p class="pillars-line">Oração <b>•</b> Presença <b>•</b> Dons <b>•</b> Ativação</p>
+      <p class="lead">A rotina tenta nos consumir. Mas existe um lugar onde as tensões são aliviadas e a gente se rende na presença de Deus. Começamos na minha casa, depois na sua.</p>
+      <div class="ctas">
+        <a class="btn btn-solid" href="#encontro">Próximo encontro</a>
+        <a class="btn btn-ghost" href="#video">Assistir ao vídeo</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="quem-somos">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">Quem somos · Mover dos Filhos</p>
+        <h2>Não é uma igreja. <em>É um movimento.</em></h2>
+        <div class="text" style="margin-top:24px">
+          <p>O Mover dos Filhos é um movimento de pessoas que decidiram sair do automático do dia a dia para buscar a Deus juntas, no mesmo propósito.</p>
+          <p>Nos reunimos em casas, em volta de uma mesa, de um violão e da Palavra. Ali oramos, adoramos e esperamos em Deus para receber um novo nível de palavra, de visão e de propósito para as nossas vidas.</p>
+          <p>Não substituímos a sua igreja local. Queremos que cada casa se torne um altar e que cada pessoa leve esse mover para onde ela vive.</p>
+        </div>
+        <div class="family" aria-label="Estrutura do projeto">
+          <div class="label">Como estamos organizados</div>
+          <div class="root">
+            <img class="logo-light" src="img/mover_claro.png" alt="">
+            <img class="logo-dark" src="img/mover_escuro.png" alt="">
+            <div><strong>Mover dos Filhos</strong><span>O projeto principal</span></div>
+          </div>
+          <div class="branch">
+            <img class="logo-light" src="img/thehouse_claro.png" alt="The House">
+            <img class="logo-dark" src="img/thehouse_escuro.png" alt="The House">
+            <span class="badge">Primeiro braço · em início</span>
+          </div>
+          <div class="branch">
+            <img class="logo-light" src="img/movestore_claro.png" alt="Move Store" style="height:52px">
+            <img class="logo-dark" src="img/movestore_escuro.png" alt="Move Store" style="height:52px">
+            <span class="badge">Em breve</span>
+          </div>
+        </div>
+      </div>
+      <figure class="photo" style="margin:0">
+        <img src="img/grupo.jpg" alt="Grupo reunido em uma sala de estar, orando e adorando com violão e velas acesas" width="941" height="405">
+        <figcaption>Um encontro The House: oração, adoração e comunhão em casa.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="the-house" class="house">
+    <div class="wrap house-grid">
+      <div>
+        <p class="eyebrow">The House · um braço do Mover dos Filhos</p>
+        <h2>Começamos na minha casa, depois na sua.</h2>
+        <div class="intro" style="margin-top:22px">
+          <p>The House (A Casa) é um braço do Mover dos Filhos que está começando agora. São encontros simples, em casas, com pessoas buscando a presença de Deus sem pressa.</p>
+          <p>Não precisa de palco nem de estrutura. Precisa de um lugar aberto e de corações dispostos.</p>
+        </div>
+      </div>
+      <div class="where">
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M12 17.2s-3-1.9-3-3.9a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.9-3 3.9z"/></svg>
+            <div><h3>Pode ser na sua casa</h3><p>Abra a porta da sua sala e transforme o lugar onde você vive em um altar.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3"/><circle cx="5.5" cy="9.5" r="2.3"/><circle cx="18.5" cy="9.5" r="2.3"/><path d="M6.5 20v-2.5a5.5 5.5 0 0 1 11 0V20"/><path d="M2 19.5v-1.3a3.6 3.6 0 0 1 4.3-3.5M22 19.5v-1.3a3.6 3.6 0 0 0-4.3-3.5"/></svg>
+            <div><h3>Pode ser com amigos</h3><p>Chame quem está perto de você. A presença de Deus não é para ser vivida sozinha.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-8-4.9-8-10.6A4.4 4.4 0 0 1 12 7.4a4.4 4.4 0 0 1 8 2.5c0 5.7-8 10.6-8 10.6z"/></svg>
+            <div><h3>Pode ser o mover</h3><p>Aquilo que recebemos, levamos. Cada encontro é o começo de outro.</p></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="pilares">
+    <div class="wrap">
+      <div class="pillars-head">
+        <p class="eyebrow">Nossos pilares</p>
+        <h2>Quatro marcas de cada encontro</h2>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="medal"><img src="img/icon_oracao.png" alt=""></div>
+          <h3>Oração</h3><p>Voltar ao lugar secreto.</p>
+        </div>
+        <div class="pillar">
+          <div class="medal"><img src="img/icon_presenca.png" alt=""></div>
+          <h3>Presença</h3><p>Buscar a Deus acima de tudo.</p>
+        </div>
+        <div class="pillar">
+          <div class="medal"><img src="img/icon_dons.png" alt=""></div>
+          <h3>Dons</h3><p>Despertar e desenvolver.</p>
+        </div>
+        <div class="pillar">
+          <div class="medal"><img src="img/icon_ativacao.png" alt=""></div>
+          <h3>Ativação</h3><p>Aquilo que recebemos, levamos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="objetivos" class="goals">
+    <div class="wrap goals-grid">
+      <div>
+        <p class="eyebrow">Objetivos</p>
+        <h2>Por que nos reunimos</h2>
+      </div>
+      <ol>
+        <li><div><strong>Tirar as pessoas da rotina</strong><span>Criar um lugar onde a correria do dia a dia dá espaço para a presença de Deus.</span></div></li>
+        <li><div><strong>Levantar altares nas casas</strong><span>Fazer de cada lar um lugar de oração e adoração, onde a família e os amigos buscam a Deus juntos.</span></div></li>
+        <li><div><strong>Unir pessoas no mesmo propósito</strong><span>Viver a fé em comunhão, sustentando uns aos outros em oração.</span></div></li>
+        <li><div><strong>Despertar e desenvolver dons</strong><span>Ajudar cada pessoa a reconhecer e usar o que Deus colocou nela.</span></div></li>
+        <li><div><strong>Multiplicar o mover</strong><span>Que quem recebe em uma casa leve o mover para a próxima.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="video" class="film">
+    <div class="wrap film-grid">
+      <div>
+        <p class="eyebrow">Assista</p>
+        <h2>Existe um lugar. <em>Uma casa.</em></h2>
+        <p>Um minuto sobre por que vale a pena sair da rotina e se reunir para adorar a Deus no mesmo propósito.</p>
+      </div>
+      <video controls playsinline preload="metadata" poster="img/video-capa.jpg" aria-label="Vídeo The House">
+        <source src="video/the-house.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section id="encontro" class="meet">
+    <div class="wrap meet-grid">
+      <div>
+        <p class="eyebrow">Próximo encontro</p>
+        <h2>Você está convidado.</h2>
+        <div class="date-card">
+          <div class="date-big">
+            <div class="wd">SEXTA-FEIRA</div>
+            <div class="d">23</div>
+            <div class="m">OUTUBRO</div>
+          </div>
+          <div class="date-info">
+            <div class="row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+              <span class="time">19h30</span>
+            </div>
+            <div class="row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+              <div>
+                <span id="endereco">Manoel Martins Pereira, nº 23</span><br>
+                <button class="copy" id="copiar" type="button">Copiar endereço</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="note">Traga alguém com você. A entrada é livre e todos são bem-vindos.</p>
+      </div>
+      <div class="invite">
+        <img src="img/convite-23-outubro.jpg" alt="Convite do encontro The House: sexta-feira, 23 de outubro, às 19h30, na Manoel Martins Pereira, nº 23" width="720" height="1280">
+      </div>
+    </div>
+  </section>
+
+  <section id="move-store" class="store">
+    <div class="wrap">
+      <div class="store-head">
+        <div>
+          <img class="store-logo logo-light" src="img/movestore_claro.png" alt="Move Store">
+          <img class="store-logo logo-dark" src="img/movestore_escuro.png" alt="Move Store">
+        </div>
+        <div>
+          <span class="soon">Em breve</span>
+          <h2>Em breve teremos a <em>Move Store</em></h2>
+          <p class="sub">Camisetas e bonés com a identidade do Mover dos Filhos, para levar a mensagem por onde você for. Veja algumas das peças que estão chegando.</p>
+        </div>
+      </div>
+      <div class="products">
+        <figure class="product">
+          <div class="pic"><img src="img/camiseta-marrom.jpg" alt="Camiseta marrom com estampa de coração e cruz vermelha e o nome Mover dos Filhos nas costas" loading="lazy"><span class="soon">Em breve</span></div>
+          <figcaption><strong>Coração e Cruz</strong><span>Camiseta marrom</span></figcaption>
+        </figure>
+        <figure class="product">
+          <div class="pic"><img src="img/camiseta-preta.jpg" alt="Camiseta preta com estampa de Jesus protegendo um cordeiro dos lobos e o nome Mover dos Filhos" loading="lazy"><span class="soon">Em breve</span></div>
+          <figcaption><strong>O Bom Pastor</strong><span>Camiseta preta</span></figcaption>
+        </figure>
+        <figure class="product">
+          <div class="pic"><img src="img/camiseta-vinho.jpg" alt="Camiseta vinho com estampa de leão e a frase Move of the Children" loading="lazy"><span class="soon">Em breve</span></div>
+          <figcaption><strong>Move of the Children</strong><span>Camiseta vinho</span></figcaption>
+        </figure>
+        <figure class="product">
+          <div class="pic" style="background:#d4d4d4"><img src="img/bones.jpg" alt="Bonés preto e branco com os logos do Mover dos Filhos e da Move Store" loading="lazy" style="object-fit:contain"><span class="soon">Em breve</span></div>
+          <figcaption><strong>Bonés</strong><span>Preto e branco</span></figcaption>
+        </figure>
+      </div>
+      <p class="follow">Fique de olho no lançamento: <b>@movestore</b></p>
+    </div>
+  </section>
+
+  <section class="verse">
+    <div class="wrap">
+      <blockquote>Buscai ao Senhor enquanto se pode achar; invocai-o enquanto está perto.</blockquote>
+      <cite>ISAÍAS 55:6</cite>
+    </div>
+  </section>
+
+  <section id="contato" class="connect">
+    <div class="wrap">
+      <p class="eyebrow">Caminhe com a gente</p>
+      <h2>Leve o mover <em>para a sua casa</em></h2>
+      <p class="sub">Siga o Mover dos Filhos para acompanhar os próximos encontros, ou fale com a gente para receber um The House na sua casa.</p>
+      <div class="links">
+        <div class="link-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor"/></svg>
+          <strong>Instagram</strong><span>Em breve</span>
+        </div>
+        <div class="link-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 10h8M8 13.5h5"/><path d="M4 19.5 5.3 16A8 8 0 1 1 8 18.8z" stroke-linejoin="round"/></svg>
+          <strong>WhatsApp</strong><span>Em breve</span>
+        </div>
+        <div class="link-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3.5"/><path d="m10.5 9.5 4 2.5-4 2.5z" fill="currentColor"/></svg>
+          <strong>YouTube</strong><span>Em breve</span>
+        </div>
+      </div>
+      <div class="manifesto">Não é uma igreja.<br><b>É um movimento.</b></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <img class="logo-light" src="img/mover_claro.png" alt="Mover dos Filhos">
+      <img class="logo-dark" src="img/mover_escuro.png" alt="Mover dos Filhos">
+      <div><small>Mover dos Filhos</small>The House é um braço do Mover dos Filhos.</div>
+    </div>
+    <span>Vamos juntos buscar e ver Deus se manifestar na sua casa.</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById("copiar");
+    var addr = document.getElementById("endereco");
+    if (!btn || !addr) return;
+    btn.addEventListener("click", function () {
+      var text = addr.textContent.trim();
+      function selectFallback() {
+        var r = document.createRange(); r.selectNodeContents(addr);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = "Selecionado — copie com Ctrl+C";
+      }
+      try {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = "Endereço copiado";
+          setTimeout(function () { btn.textContent = "Copiar endereço"; }, 2200);
+        }, selectFallback);
+      } catch (e) { selectFallback(); }
+    });
+  })();
+</script>
+
+</body>
+</html>
