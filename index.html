@@ -161,6 +161,26 @@ section { padding-block: 88px; }
 .photo figcaption { font-size: 13px; color: var(--muted); margin-top: 10px; letter-spacing: 0.04em; }
 @media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 36px; } }
 
+/* nossa história */
+.story-grid { display: grid; grid-template-columns: 0.9fr 1.2fr; gap: 64px; align-items: start; }
+.story-grid > * { min-width: 0; }
+.story h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
+.story h2 em { color: var(--gold); }
+.story .intro { margin-top: 22px; display: grid; gap: 16px; color: var(--muted); }
+.story .intro p:first-child { color: var(--fg); font-size: 19px; }
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 34px; }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+.timeline li { position: relative; padding-left: 44px; display: grid; gap: 6px; }
+.timeline li::before {
+  content: ""; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--gold);
+}
+.timeline li.now::before { background: var(--gold); }
+.timeline .when { font-size: 12.5px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+.timeline h3 { font-size: 24px; }
+.timeline p { color: var(--muted); }
+@media (max-width: 860px) { .story-grid { grid-template-columns: 1fr; gap: 36px; } }
+
 /* the house */
 .house { background: var(--surface); }
 .house-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
@@ -357,6 +377,7 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
     </a>
     <nav aria-label="Seções">
       <a href="#quem-somos">Quem somos</a>
+      <a href="#historia">Nossa história</a>
       <a href="#the-house">The House</a>
       <a href="#pilares">Pilares</a>
       <a href="#objetivos">Objetivos</a>
@@ -420,6 +441,41 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
         <img src="img/grupo.jpg" alt="Grupo reunido em uma sala de estar, orando e adorando com violão e velas acesas" width="941" height="405">
         <figcaption>Um encontro The House: oração, adoração e comunhão em casa.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section id="historia" class="story">
+    <div class="wrap story-grid">
+      <div>
+        <p class="eyebrow">Nossa história</p>
+        <h2>Tudo começou com amigos que decidiram <em>não caminhar sozinhos.</em></h2>
+        <div class="intro">
+          <p>Em 2024, olhamos ao nosso redor e vimos amigos, irmãos e parentes precisando de ajuda, de incentivo e de acolhimento.</p>
+          <p>Entendemos isso como um chamado. Começamos a nos reunir para que um desse força ao outro, um desse apoio ao outro, e construir juntos algo maior do que cada um de nós.</p>
+        </div>
+      </div>
+      <ol class="timeline">
+        <li>
+          <span class="when">2024 · O começo</span>
+          <h3>Amigos e irmãos que se reuniram</h3>
+          <p>Pessoas que precisavam de cuidado encontraram umas nas outras força, apoio e acolhimento. Foi assim que o Mover dos Filhos nasceu.</p>
+        </li>
+        <li>
+          <span class="when">2024 · Nos lares</span>
+          <h3>Os primeiros movimentos nas casas</h3>
+          <p>As portas se abriram e os primeiros encontros aconteceram nos lares, com oração, Palavra e cuidado uns com os outros.</p>
+        </li>
+        <li>
+          <span class="when">Fim de 2024 · Celebração</span>
+          <h3>A Confraternização dos Filhos</h3>
+          <p>Fechamos o ano juntos, celebrando e agradecendo a Deus por tudo o que Ele tinha começado.</p>
+        </li>
+        <li class="now">
+          <span class="when">Hoje · O próximo passo</span>
+          <h3>Nasce o The House</h3>
+          <p>O movimento ganha seu primeiro braço: encontros nas casas para buscar a presença de Deus. E a Move Store está a caminho.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
