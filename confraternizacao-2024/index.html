@@ -64,6 +64,8 @@ section { padding-block: 72px; }
 @media (max-width: 820px) { .video-sec .wrap { grid-template-columns: 1fr; gap: 28px; } }
 
 .gallery { background: var(--surface); }
+.backstage .grid { margin-top: 28px; }
+.backstage-lead { color: var(--muted); max-width: 62ch; }
 .gallery-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; margin-bottom: 30px; }
 .gallery-head h2 { font-size: clamp(30px, 4vw, 46px); margin-top: 12px; }
 .gallery-head p { color: var(--muted); }
@@ -132,6 +134,20 @@ footer .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; justify-cont
     </div>
   </section>
 
+  <section class="backstage" id="bastidores">
+    <div class="wrap">
+      <div class="gallery-head">
+        <div>
+          <p class="eyebrow">Bastidores · Nosso começo em 2024</p>
+          <h2>Antes da festa, a família</h2>
+        </div>
+        <p>11 fotos · toque para ampliar</p>
+      </div>
+      <p class="backstage-lead">Os encontros nas casas, os ensaios do louvor e as mãos que prepararam cada detalhe da confraternização. Foi assim que tudo começou: amigos e irmãos, um dando força ao outro.</p>
+      <div class="grid" id="grid-b"></div>
+    </div>
+  </section>
+
   <section class="gallery" id="fotos">
     <div class="wrap">
       <div class="gallery-head">
@@ -173,28 +189,34 @@ footer .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; justify-cont
 
 <script>
   (function () {
-    var TOTAL = 15;
-    var grid = document.getElementById("grid");
+    var SETS = {
+      fotos: { n: 15, dir: "", file: "foto-", grid: "grid", label: "da Confraternização dos Filhos 2024" },
+      bastidores: { n: 11, dir: "bastidores/", file: "b-", grid: "grid-b", label: "dos bastidores de 2024" }
+    };
     var lb = document.getElementById("lb"), img = document.getElementById("lb-img"), pos = document.getElementById("lb-pos");
-    var current = 0, lastFocus = null;
-    function name(i) { return "foto-" + String(i + 1).padStart(2, "0") + ".jpg"; }
-    for (var i = 0; i < TOTAL; i++) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("aria-label", "Ampliar foto " + (i + 1) + " de " + TOTAL);
-      b.dataset.i = i;
-      var t = document.createElement("img");
-      t.src = "miniaturas/" + name(i);
-      t.alt = "Foto " + (i + 1) + " da Confraternização dos Filhos 2024";
-      t.loading = i < 6 ? "eager" : "lazy";
-      b.appendChild(t);
-      b.addEventListener("click", function () { open(+this.dataset.i, this); });
-      grid.appendChild(b);
-    }
+    var current = 0, set = SETS.fotos, lastFocus = null;
+    function name(st, i) { return st.file + String(i + 1).padStart(2, "0") + ".jpg"; }
+    Object.keys(SETS).forEach(function (key) {
+      var st = SETS[key], grid = document.getElementById(st.grid);
+      for (var i = 0; i < st.n; i++) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "Ampliar foto " + (i + 1) + " de " + st.n);
+        b.dataset.i = i; b.dataset.set = key;
+        var t = document.createElement("img");
+        t.src = st.dir + "miniaturas/" + name(st, i);
+        t.alt = "Foto " + (i + 1) + " " + st.label;
+        t.loading = i < 6 ? "eager" : "lazy";
+        b.appendChild(t);
+        b.addEventListener("click", function () { set = SETS[this.dataset.set]; open(+this.dataset.i, this); });
+        grid.appendChild(b);
+      }
+    });
     function show(i) {
+      var TOTAL = set.n;
       current = (i + TOTAL) % TOTAL;
-      img.src = "fotos/" + name(current);
-      img.alt = "Foto " + (current + 1) + " da Confraternização dos Filhos 2024";
+      img.src = set.dir + "fotos/" + name(set, current);
+      img.alt = "Foto " + (current + 1) + " " + set.label;
       pos.textContent = (current + 1) + " / " + TOTAL;
     }
     function open(i, from) { lastFocus = from; show(i); lb.hidden = false; document.body.style.overflow = "hidden"; document.getElementById("lb-close").focus(); }
