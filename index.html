@@ -317,6 +317,21 @@ a.link-card:hover { border-color: var(--gold); }
 .manifesto b { color: var(--gold); font-weight: 600; }
 
 /* move store (em breve) */
+.social-sec .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+.social-sec .wrap > * { min-width: 0; }
+.social-logo { width: min(340px, 80%); height: auto; margin: 0 auto; }
+.social-sec .logo-wrap { text-align: center; }
+.social-sec h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
+.social-sec h2 em { color: var(--gold); }
+.social-sec .text { display: grid; gap: 16px; color: var(--muted); margin-top: 20px; }
+.social-sec .text p:first-child { color: var(--fg); font-size: 19px; }
+.action { margin-top: 30px; display: grid; grid-template-columns: 120px 1fr; gap: 22px; align-items: center; border: 1px solid var(--line); border-radius: 6px; padding: 18px; background: var(--surface); }
+.action img { width: 120px; height: 120px; object-fit: contain; background: #fff; border-radius: 6px; }
+.action .when { font-size: 12.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.action h3 { font-size: 24px; margin: 4px 0; }
+.action p { color: var(--muted); font-size: 15px; }
+@media (max-width: 860px) { .social-sec .wrap { grid-template-columns: 1fr; gap: 32px; } }
+@media (max-width: 480px) { .action { grid-template-columns: 84px 1fr; } .action img { width: 84px; height: 84px; } }
 .store { background: var(--surface); }
 .store-head { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; margin-bottom: 44px; }
 .store-head > * { min-width: 0; }
@@ -392,6 +407,7 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
       <a href="#pilares">Pilares</a>
       <a href="#objetivos">Objetivos</a>
       <a href="#encontro">Próximo encontro</a>
+      <a href="#move-social">Move Social</a>
       <a href="#move-store">Move Store</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -439,6 +455,11 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
             <img class="logo-light" src="img/thehouse_claro.png" alt="The House">
             <img class="logo-dark" src="img/thehouse_escuro.png" alt="The House">
             <span class="badge">Primeiro braço · em início</span>
+          </div>
+          <div class="branch">
+            <img class="logo-light" src="img/movesocial_h_claro.png" alt="Move Social" style="height:44px">
+            <img class="logo-dark" src="img/movesocial_h_escuro.png" alt="Move Social" style="height:44px">
+            <span class="badge">Braço de ações sociais</span>
           </div>
           <div class="branch">
             <img class="logo-light" src="img/movestore_claro.png" alt="Move Store" style="height:52px">
@@ -619,6 +640,31 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
       </div>
       <div class="invite">
         <img src="img/convite-23-outubro.jpg" alt="Convite do encontro The House: sexta-feira, 23 de outubro, às 19h30, na Manoel Martins Pereira, nº 23" width="720" height="1280">
+      </div>
+    </div>
+  </section>
+
+  <section id="move-social" class="social-sec">
+    <div class="wrap">
+      <div class="logo-wrap">
+        <img class="social-logo logo-light" src="img/movesocial_v_claro.png" alt="Move Social · Ações sociais do Mover dos Filhos">
+        <img class="social-logo logo-dark" src="img/movesocial_v_escuro.png" alt="Move Social · Ações sociais do Mover dos Filhos">
+      </div>
+      <div>
+        <p class="eyebrow">Move Social · um braço do Mover dos Filhos</p>
+        <h2>Aquilo que recebemos, <em>levamos.</em></h2>
+        <div class="text">
+          <p>O Move Social é o braço de ações sociais do Mover dos Filhos. É o amor que recebemos de Deus se transformando em cuidado prático com quem precisa.</p>
+          <p>Visitas, doações e momentos de presença junto a instituições e famílias, para servir com as mãos o que vivemos no altar.</p>
+        </div>
+        <div class="action">
+          <img src="img/santa-barbara.jpg" alt="Logo da Fundação Santa Bárbara">
+          <div>
+            <span class="when">Dezembro · data a definir</span>
+            <h3>Orfanato Santa Bárbara</h3>
+            <p>Vila de Cava · em breve mais informações</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
