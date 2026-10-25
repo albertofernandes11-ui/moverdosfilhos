@@ -281,6 +281,20 @@ section { padding-block: 88px; }
   padding: 8px 14px; border-radius: 3px; cursor: pointer;
 }
 .copy:hover { border-color: var(--gold); }
+.ag-lead { margin-top: 14px; color: var(--muted); max-width: 640px; }
+.agenda { list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ag-item { display: grid; grid-template-columns: 86px 1fr 96px; gap: 20px; align-items: center; padding: 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.ag-date { text-align: center; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); padding-right: 16px; }
+.ag-date .d { font-family: var(--font-display); font-weight: 700; font-size: 46px; line-height: 1; color: var(--gold); font-variant-numeric: lining-nums; }
+.ag-date .m { font-size: 13px; font-weight: 600; letter-spacing: 0.26em; margin-top: 6px; }
+.ag-date .wd { font-size: 10.5px; letter-spacing: 0.08em; color: var(--muted); margin-top: 4px; line-height: 1.3; }
+.ag-tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.ag-body h3 { font-family: var(--font-display); font-size: 22px; line-height: 1.2; margin-top: 6px; }
+.ag-body h3 em { color: var(--gold); }
+.ag-info { font-size: 14px; color: var(--muted); margin-top: 8px; }
+.ag-img { width: 96px; height: 128px; object-fit: cover; border-radius: 4px; box-shadow: 0 8px 22px rgba(0,0,0,0.18); }
+@media (max-width: 860px) { .agenda { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .ag-item { grid-template-columns: 64px 1fr 72px; gap: 14px; padding: 16px 14px; } .ag-date { padding-right: 10px; } .ag-date .d { font-size: 36px; } .ag-img { width: 72px; height: 96px; } .ag-body h3 { font-size: 18px; } }
 .meet .note { margin-top: 22px; color: var(--muted); }
 .invite img { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto; border-radius: 4px; box-shadow: 0 20px 50px rgba(20,18,16,0.18); }
 @media (max-width: 860px) { .meet-grid { grid-template-columns: 1fr; gap: 40px; } }
@@ -406,7 +420,7 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
       <a href="#the-house">The House</a>
       <a href="#pilares">Pilares</a>
       <a href="#objetivos">Objetivos</a>
-      <a href="#encontro">Próximo encontro</a>
+      <a href="#encontro">Agenda</a>
       <a href="#move-social">Move Social</a>
       <a href="#move-store">Move Store</a>
       <a href="#contato">Contato</a>
@@ -428,7 +442,7 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
       <p class="pillars-line">Oração <b>•</b> Presença <b>•</b> Dons <b>•</b> Ativação</p>
       <p class="lead">A rotina tenta nos consumir. Mas existe um lugar onde as tensões são aliviadas e a gente se rende na presença de Deus. Começamos na minha casa, depois na sua.</p>
       <div class="ctas">
-        <a class="btn btn-solid" href="#encontro">Próximo encontro</a>
+        <a class="btn btn-solid" href="#encontro">Nossa agenda</a>
         <a class="btn btn-ghost" href="#video">Assistir ao vídeo</a>
       </div>
     </div>
@@ -612,35 +626,49 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
   </section>
 
   <section id="encontro" class="meet">
-    <div class="wrap meet-grid">
-      <div>
-        <p class="eyebrow">Próximo encontro</p>
-        <h2>Você está convidado.</h2>
-        <div class="date-card">
-          <div class="date-big">
-            <div class="wd">SEXTA-FEIRA</div>
-            <div class="d">23</div>
-            <div class="m">OUTUBRO</div>
+    <div class="wrap">
+      <p class="eyebrow">Nossa agenda</p>
+      <h2>Novembro e Dezembro</h2>
+      <p class="ag-lead">Anote na agenda e venha com a gente. Traga alguém com você: todos são bem-vindos.</p>
+      <ul class="agenda">
+        <li class="ag-item">
+          <div class="ag-date"><span class="d">★</span><span class="m">NOV</span><span class="wd">Data a definir</span></div>
+          <div class="ag-body">
+            <p class="ag-tag">Move Cine · The Chosen</p>
+            <h3>Inauguração da 6ª Temporada · <em>Episódio 2</em></h3>
+            <p class="ag-info">Terraço do Bravo Zulu · Waldenir</p>
           </div>
-          <div class="date-info">
-            <div class="row">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-              <span class="time">19h30</span>
-            </div>
-            <div class="row">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
-              <div>
-                <span id="endereco">Manoel Martins Pereira, nº 23</span><br>
-                <button class="copy" id="copiar" type="button">Copiar endereço</button>
-              </div>
-            </div>
+          <img class="ag-img" src="img/ag-thechosen.jpg" alt="Cartaz de The Chosen, 6ª temporada" width="360" height="480" loading="lazy">
+        </li>
+        <li class="ag-item">
+          <div class="ag-date"><span class="d">20</span><span class="m">NOV</span><span class="wd">Sexta-feira</span></div>
+          <div class="ag-body">
+            <p class="ag-tag">Evangelismo</p>
+            <h3>Manifestação <em>dos Filhos</em></h3>
+            <p class="ag-info">A partir das 9h · Penha</p>
           </div>
-        </div>
-        <p class="note">Traga alguém com você. A entrada é livre e todos são bem-vindos.</p>
-      </div>
-      <div class="invite">
-        <img src="img/convite-23-outubro.jpg" alt="Convite do encontro The House: sexta-feira, 23 de outubro, às 19h30, na Manoel Martins Pereira, nº 23" width="720" height="1280">
-      </div>
+          <img class="ag-img" src="img/ag-manifestacao.jpg" alt="Arte da Manifestação dos Filhos" width="360" height="480" loading="lazy">
+        </li>
+        <li class="ag-item">
+          <div class="ag-date"><span class="d">27</span><span class="m">NOV</span><span class="wd">Sexta-feira</span></div>
+          <div class="ag-body">
+            <p class="ag-tag">The House · Posse</p>
+            <h3>Com a presença do <em>Pastor Feitosa</em></h3>
+            <p class="ag-info">Às 19h30</p>
+          </div>
+          <img class="ag-img" src="img/ag-pastor-feitosa.jpg" alt="Foto do Pastor Feitosa" width="360" height="480" loading="lazy">
+        </li>
+        <li class="ag-item">
+          <div class="ag-date"><span class="d">★</span><span class="m">DEZ</span><span class="wd">Data a definir</span></div>
+          <div class="ag-body">
+            <p class="ag-tag">Move Social</p>
+            <h3>Orfanato <em>Santa Bárbara</em></h3>
+            <p class="ag-info">Vila de Cava · mais informações em breve</p>
+          </div>
+          <img class="ag-img" src="img/ag-santa-barbara.jpg" alt="Logo da Fundação Santa Bárbara" width="360" height="480" loading="lazy">
+        </li>
+      </ul>
+      <p class="note">★ Datas a definir. Fique de olho nos nossos avisos.</p>
     </div>
   </section>
 
