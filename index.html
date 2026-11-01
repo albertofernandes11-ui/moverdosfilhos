@@ -4,381 +4,318 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mover dos Filhos</title>
+<meta name="description" content="Mover dos Filhos: uma casa, um altar, um mover. Oração, presença, dons e ativação nas casas, com o The House, o Move Social e a Move Store.">
 <meta property="og:title" content="Mover dos Filhos">
 <meta property="og:description" content="Uma casa, um altar, um mover. Conheça o Mover dos Filhos e o The House.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0E0C09">
-<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Mover dos Filhos — The House: uma casa, um altar, um mover. Oração, presença, dons e ativação nas casas.">
+<meta name="theme-color" content="#15100B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap">
 <style>
-/* Layout: página creme como o flyer, com faixas escuras de "altar" (abertura, vídeo, versículo) e texto alinhado à esquerda nas seções. */
+/*
+  Conceito: uma noite em casa. A página alterna "noite" (sala à luz de velas)
+  e "papel" (a leitura, como o folder e o marcador). O momento marcante é a
+  abertura: a frase cresce linha a linha, como um mover que vai ganhando força.
+*/
 :root {
-  --bg: #F5EFE4;          /* creme do flyer */
-  --surface: #EDE4D4;     /* creme mais fundo */
-  --fg: #141210;          /* tinta */
-  --muted: #5B5248;
-  --gold: #A8732F;        /* dourado para texto sobre creme */
-  --gold-soft: #D9A85B;   /* dourado sobre escuro */
-  --line: #CDB892;
-  --band: #0E0C09;        /* faixas escuras */
-  --band-fg: #F2EADC;
-  --band-muted: #BFB29C;
-  --medal: #F5EFE4;       /* fundo dos ícones */
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-body: "Montserrat", "Segoe UI", Helvetica, Arial, sans-serif;
-  --wrap: 1120px;
+  --night: #15100B;      /* noite: fundo das faixas escuras */
+  --ember: #241A12;      /* brasa: superfície sobre a noite */
+  --gold: #D9A85B;       /* ouro sobre escuro */
+  --gold-ink: #94631F;   /* ouro para texto sobre papel */
+  --paper: #F3ECE0;      /* papel */
+  --paper-2: #EAE0CF;    /* papel mais fundo */
+  --ink: #17120D;        /* tinta */
+  --ink-muted: #5E5347;
+  --cream: #F2EADC;      /* texto sobre a noite */
+  --cream-muted: #B9AC97;
+  --wine: #6E2622;       /* vinho: Move Social */
+  --line-paper: #D3C3A6;
+  --line-night: rgba(217,168,91,0.22);
+  --display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --body: "Montserrat", "Segoe UI", Helvetica, Arial, sans-serif;
+  --wrap: 1180px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #15120E; --surface: #1F1A14; --fg: #F2EADC; --muted: #BFB29C;
-    --gold: #D9A85B; --gold-soft: #E3B86E; --line: #4A3C28;
-    --band: #0A0806; --band-fg: #F2EADC; --band-muted: #BFB29C; --medal: #EDE4D4;
-    color-scheme: dark;
+    --paper: #1C1610; --paper-2: #221B14; --ink: #F2EADC; --ink-muted: #BDB09B;
+    --gold-ink: #D9A85B; --line-paper: #43362A; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #15120E; --surface: #1F1A14; --fg: #F2EADC; --muted: #BFB29C;
-  --gold: #D9A85B; --gold-soft: #E3B86E; --line: #4A3C28;
-  --band: #0A0806; --band-fg: #F2EADC; --band-muted: #BFB29C; --medal: #EDE4D4;
-  color-scheme: dark;
+  --paper: #1C1610; --paper-2: #221B14; --ink: #F2EADC; --ink-muted: #BDB09B;
+  --gold-ink: #D9A85B; --line-paper: #43362A; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.65;
-}
-body::before {
-  content: ""; position: fixed; inset: 0 0 auto;
-  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg);
-}
+body { margin: 0; background: var(--night); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.65; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.08; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, video:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
 .wrap {
-  max-width: var(--wrap);
-  margin: 0 auto;
+  max-width: var(--wrap); margin: 0 auto;
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
-h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.08; text-wrap: balance; margin: 0; }
-p { margin: 0; }
-a { color: inherit; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
-.eyebrow {
-  font-family: var(--font-body); font-weight: 600; font-size: 13px;
-  letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold);
-}
-.rule { display: flex; align-items: center; gap: 18px; }
-.rule::before, .rule::after { content: ""; height: 1px; background: var(--line); flex: 1; }
 
-/* logos: versão clara/escura conforme o tema */
+/* faixas */
+.paper { background: var(--paper); color: var(--ink); }
+.paper-2 { background: var(--paper-2); color: var(--ink); }
+.night { background: var(--night); color: var(--cream); }
+.band { padding-block: 104px; }
+@media (max-width: 640px) { .band { padding-block: 68px; } }
+
+/* rótulo de seção: frase curta, em caixa normal */
+.kicker { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--gold-ink); margin-bottom: 14px; }
+.night .kicker { color: var(--gold); }
+.h2 { font-size: clamp(34px, 4.6vw, 58px); letter-spacing: -0.01em; }
+.lede { font-size: 19px; }
+.muted { color: var(--ink-muted); }
+.night .muted { color: var(--cream-muted); }
+
+/* logos: versão para fundo claro ou escuro */
 .logo-dark { display: none; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .logo-light { display: none; }
-  :root:not([data-theme="light"]) .logo-dark { display: block; }
+  :root:not([data-theme="light"]) .paper .logo-light, :root:not([data-theme="light"]) .paper-2 .logo-light { display: none; }
+  :root:not([data-theme="light"]) .paper .logo-dark, :root:not([data-theme="light"]) .paper-2 .logo-dark { display: block; }
 }
-:root[data-theme="dark"] .logo-light { display: none; }
-:root[data-theme="dark"] .logo-dark { display: block; }
+:root[data-theme="dark"] .paper .logo-light, :root[data-theme="dark"] .paper-2 .logo-light { display: none; }
+:root[data-theme="dark"] .paper .logo-dark, :root[data-theme="dark"] .paper-2 .logo-dark { display: block; }
 
 /* topo */
 .top {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10; background: rgba(21,16,11,0.86);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-night); padding-top: env(safe-area-inset-top, 0px);
 }
-.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
-.top img { height: 50px; width: auto; }
-.top nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: flex-end; }
-.top nav a {
-  text-decoration: none; font-size: 12.5px; font-weight: 600; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--muted);
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 10px; }
+.top .brand img { height: 46px; width: auto; display: block; }
+.top nav { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.top nav a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--cream-muted); padding: 8px 10px; border-radius: 6px; }
+.top nav a:hover { color: var(--cream); background: rgba(217,168,91,0.12); }
+.menu-btn { display: none; background: none; border: 1px solid var(--line-night); color: var(--cream); border-radius: 8px; padding: 9px 14px; font: 600 14px var(--body); cursor: pointer; }
+@media (max-width: 900px) {
+  .menu-btn { display: inline-flex; }
+  .top nav { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; background: var(--night); border-bottom: 1px solid var(--line-night); padding: 8px 20px 18px; }
+  .top nav.open { display: flex; }
+  .top nav a { font-size: 17px; padding: 12px 4px; border-bottom: 1px solid var(--line-night); border-radius: 0; }
 }
-.top nav a:hover { color: var(--gold); }
-@media (max-width: 760px) { .top nav { display: none; } }
 
-/* abertura (faixa escura) */
-.hero { background: var(--band); color: var(--band-fg); position: relative; overflow: hidden; }
+/* abertura */
+.hero { position: relative; overflow: hidden; }
 .hero::before {
-  content: ""; position: absolute; inset: -20% 0 auto; height: 120%;
-  background: radial-gradient(ellipse at 50% 30%, rgba(217,168,91,0.28), transparent 60%);
-  pointer-events: none;
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 70% at 78% 40%, rgba(217,168,91,0.30), transparent 70%);
+  animation: lamp 2.4s ease-out both;
 }
-.hero .wrap { position: relative; padding-block: 72px 80px; display: grid; justify-items: center; text-align: center; gap: 28px; }
-.hero-parent { display: grid; justify-items: center; gap: 12px; }
-.hero-parent img { height: 150px; width: auto; }
-@media (max-width: 480px) { .hero-parent img { height: 120px; } }
-.hero-parent span { font-size: 12px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--band-muted); }
-.hero-sep { width: 1px; height: 34px; background: var(--gold-soft); opacity: 0.6; }
-.hero-logo { width: min(400px, 78%); height: auto; }
-.arm-tag {
-  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px 10px; align-items: center;
-  border: 1px solid rgba(217,168,91,0.5); border-radius: 999px; padding: 8px 18px;
-  font-size: 12.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--band-fg);
-}
-.arm-tag b { color: var(--gold-soft); font-weight: 600; }
-.arm-tag i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-soft); display: inline-block; }
-.hero h1 { font-size: clamp(44px, 8vw, 96px); letter-spacing: -0.02em; }
-.hero h1 .l2 { color: var(--gold-soft); display: block; }
-.hero h1 .l3 { font-style: italic; display: block; }
-.hero h1 .l1 { display: block; }
-.pillars-line { font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--band-muted); max-width: 100%; }
-.pillars-line b { color: var(--gold-soft); font-weight: 400; padding: 0 6px; }
-@media (max-width: 480px) { .pillars-line { font-size: 12px; letter-spacing: 0.2em; } }
-.hero .lead { max-width: 58ch; color: var(--band-muted); font-size: 18px; }
-.ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+@keyframes lamp { from { opacity: 0; } to { opacity: 1; } }
+.hero .wrap:not(.window-wrap) { position: relative; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: center; padding-block: 88px 72px; }
+.hero .wrap > * { min-width: 0; }
+.presents { display: flex; align-items: center; gap: 14px; color: var(--cream-muted); font-size: 15px; margin-bottom: 34px; }
+.presents img { height: 64px; width: auto; }
+.crescendo { font-weight: 600; letter-spacing: -0.02em; line-height: 0.98; }
+.crescendo span { display: block; animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
+.crescendo .c1 { font-size: clamp(34px, 4.4vw, 56px); color: var(--cream-muted); font-weight: 400; animation-delay: .15s; }
+.crescendo .c2 { font-size: clamp(50px, 7vw, 92px); color: var(--cream); animation-delay: .45s; }
+.crescendo .c3 { font-size: clamp(68px, 10.5vw, 144px); color: var(--gold); font-style: italic; animation-delay: .75s; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.hero .lede { margin-top: 30px; max-width: 52ch; color: var(--cream-muted); }
+.ctas { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
 .btn {
-  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
-  font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 15px 26px; border-radius: 3px; border: 1.5px solid var(--gold-soft);
-  cursor: pointer; font-family: var(--font-body);
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
+  font: 600 15px var(--body); padding: 15px 24px; border-radius: 999px; border: 1.5px solid var(--gold); cursor: pointer;
 }
-.btn-solid { background: var(--gold-soft); color: #141210; }
-.btn-solid:hover { background: var(--band-fg); border-color: var(--band-fg); }
-.btn-ghost { background: transparent; color: var(--band-fg); }
-.btn-ghost:hover { background: rgba(217,168,91,0.15); }
-
-section { padding-block: 88px; }
-@media (max-width: 600px) { section { padding-block: 60px; } }
+.btn-solid { background: var(--gold); color: #17120D; }
+.btn-solid:hover { background: var(--cream); border-color: var(--cream); }
+.btn-ghost { color: var(--cream); background: transparent; }
+.btn-ghost:hover { background: rgba(217,168,91,0.14); }
+.house-mark { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.house-mark img { width: min(340px, 100%); height: auto; }
+.house-mark p { color: var(--cream-muted); font-size: 15px; max-width: 30ch; }
+.house-mark .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.house-mark .pills span { border: 1px solid var(--line-night); border-radius: 999px; padding: 6px 14px; font-size: 14px; color: var(--cream); }
+@media (prefers-reduced-motion: reduce) { .hero::before, .crescendo span { animation: none; } }
+@media (max-width: 860px) {
+  .hero .wrap:not(.window-wrap) { grid-template-columns: 1fr; padding-block: 56px 56px; gap: 44px; }
+  .house-mark { justify-items: start; text-align: left; }
+  .house-mark .pills { justify-content: flex-start; }
+  .house-mark img { width: min(260px, 70%); }
+}
+.window { position: relative; }
+.window img { display: block; width: 100%; height: auto; max-height: 520px; object-fit: cover; border-radius: 18px 18px 0 0; }
+.window figcaption { display: block; } @media (max-width: 640px) { .window figcaption { display: none; } }
+.window figcaption { position: absolute; left: 24px; bottom: 18px; color: var(--cream); font-size: 14px; text-shadow: 0 1px 8px rgba(0,0,0,0.7); }
 
 /* quem somos */
-.about { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
 .about > * { min-width: 0; }
-.about h2 { font-size: clamp(34px, 4.6vw, 54px); margin-top: 14px; }
-.about h2 em { color: var(--gold); }
-.about .text { display: grid; gap: 18px; color: var(--muted); }
-.about .text p:first-of-type { color: var(--fg); font-size: 19px; }
-.photo { position: relative; }
-.photo img { width: 100%; height: auto; display: block; border-radius: 2px; }
-.photo figcaption { font-size: 13px; color: var(--muted); margin-top: 10px; letter-spacing: 0.04em; }
-@media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: 36px; } }
+.about .text { display: grid; gap: 18px; margin-top: 26px; }
+.tree { border-left: 2px solid var(--gold-ink); padding-left: 28px; display: grid; gap: 26px; }
+.tree h3 { font-size: 22px; }
+.tree .root { display: flex; align-items: center; gap: 18px; }
+.tree .root img { height: 78px; width: auto; }
+.tree .root p { font-size: 15px; }
+.tree ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.tree li { display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: center; position: relative; }
+.tree li::before { content: ""; position: absolute; left: -28px; top: 50%; width: 18px; border-top: 2px solid var(--gold-ink); }
+.tree li img { height: 50px; width: auto; max-width: 150px; object-fit: contain; object-position: left center; }
+.tree li p { font-size: 15px; }
+.tree li strong { display: block; font-size: 16px; }
+@media (max-width: 900px) { .about { grid-template-columns: 1fr; gap: 48px; } }
+@media (max-width: 480px) { .tree li { grid-template-columns: 1fr; gap: 6px; } }
 
-/* nossa história */
-.story-grid { display: grid; grid-template-columns: 0.9fr 1.2fr; gap: 64px; align-items: start; }
-.story-grid > * { min-width: 0; }
-.story h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
-.story h2 em { color: var(--gold); }
-.story .intro { margin-top: 22px; display: grid; gap: 16px; color: var(--muted); }
-.story .intro p:first-child { color: var(--fg); font-size: 19px; }
-.timeline { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 34px; }
-.timeline::before { content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
-.timeline li { position: relative; padding-left: 44px; display: grid; gap: 6px; }
-.timeline li::before {
-  content: ""; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%;
-  background: var(--bg); border: 2px solid var(--gold);
-}
-.timeline li.now::before { background: var(--gold); }
-.timeline .when { font-size: 12.5px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
-.timeline h3 { font-size: 24px; }
-.timeline p { color: var(--muted); }
-.photos-link {
-  margin-top: 12px; display: inline-flex; align-items: center; gap: 14px; text-decoration: none;
-  border: 1px solid var(--line); border-radius: 10px; padding: 10px 16px 10px 10px; background: var(--surface); max-width: 100%;
-}
-.photos-link:hover { border-color: var(--gold); }
+/* história */
+.story-head { max-width: 760px; }
+.story-head .text { display: grid; gap: 16px; margin-top: 22px; }
+.timeline { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--line-paper); }
+.timeline li { position: relative; padding: 30px 26px 0 0; display: grid; gap: 8px; align-content: start; }
+.timeline li::before { content: ""; position: absolute; top: -9px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--paper-2); border: 2px solid var(--gold-ink); }
+.timeline li.now::before { background: var(--gold-ink); }
+.timeline .when { font-family: var(--display); font-style: italic; color: var(--gold-ink); font-size: 18px; }
+.timeline h3 { font-size: 23px; }
+.timeline p { color: var(--ink-muted); font-size: 16px; }
+.photos-link { margin-top: 10px; display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; font-size: 14px; color: var(--ink); border-bottom: 1.5px solid var(--gold-ink); padding-bottom: 6px; width: fit-content; max-width: 100%; }
+.photos-link:hover { color: var(--gold-ink); }
 .photos-link .thumbs { display: flex; flex: none; }
-.photos-link .thumbs img { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; border: 2px solid var(--surface); }
-.photos-link .thumbs img + img { margin-left: -14px; }
-.photos-link span { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); line-height: 1.4; }
-.photos-link small { display: block; font-size: 13px; letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--muted); }
-@media (max-width: 860px) { .story-grid { grid-template-columns: 1fr; gap: 36px; } }
+.photos-link .thumbs img { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 2px solid var(--paper-2); }
+.photos-link .thumbs img + img { margin-left: -12px; }
+.photos-link small { display: block; font-weight: 400; color: var(--ink-muted); font-size: 13px; }
+@media (max-width: 960px) {
+  .timeline { grid-template-columns: 1fr; border-top: 0; border-left: 2px solid var(--line-paper); gap: 34px; margin-left: 8px; }
+  .timeline li { padding: 0 0 0 30px; }
+  .timeline li::before { top: 6px; left: -9px; }
+}
+.mural { margin-top: 64px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.mural img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 10px; }
+.mural img:nth-child(2n) { margin-top: 28px; }
+@media (max-width: 760px) { .mural { grid-template-columns: repeat(3, minmax(0, 1fr)); } .mural img:nth-child(n+4) { display: none; } }
 
-/* the house */
-.house { background: var(--surface); }
-.house-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
+/* the house + pilares */
+.house-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
 .house-grid > * { min-width: 0; }
-.house h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
-.house .intro { display: grid; gap: 16px; color: var(--muted); }
-.house .intro p:first-child { color: var(--fg); }
-.where { display: grid; gap: 0; border-top: 1px solid var(--line); }
-.where li {
-  list-style: none; display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start;
-  padding-block: 22px; border-bottom: 1px solid var(--line);
-}
-.where ul { margin: 0; padding: 0; }
-.where svg { width: 40px; height: 40px; color: var(--gold); }
-.where h3 { font-size: 22px; margin-bottom: 4px; }
-.where p { color: var(--muted); }
-@media (max-width: 860px) { .house-grid { grid-template-columns: 1fr; gap: 32px; } }
-
-/* pilares */
-.pillars-head { display: grid; gap: 12px; max-width: 640px; margin-bottom: 44px; }
-.pillars-head h2 { font-size: clamp(32px, 4.2vw, 50px); }
-.pillars { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.pillar { padding: 34px 22px 30px; display: grid; gap: 10px; align-content: start; justify-items: center; text-align: center; }
-.pillar + .pillar { border-left: 1px solid var(--line); }
-.medal { width: 112px; height: 112px; border-radius: 50%; background: var(--medal); display: grid; place-items: center; }
-.medal img { width: 84px; height: auto; mix-blend-mode: multiply; }
-.pillar h3 { font-family: var(--font-body); font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-top: 8px; }
-.pillar p { color: var(--muted); font-size: 16px; max-width: 22ch; }
-@media (max-width: 860px) {
-  .pillars { grid-template-columns: repeat(2, 1fr); }
-  .pillar:nth-child(3) { border-left: 0; }
-  .pillar:nth-child(n+3) { border-top: 1px solid var(--line); }
-}
-@media (max-width: 440px) {
-  .pillars { grid-template-columns: 1fr; }
-  .pillar + .pillar { border-left: 0; border-top: 1px solid var(--line); }
-}
+.house-grid .text { display: grid; gap: 16px; margin-top: 24px; }
+.ways { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line-night); }
+.ways li { display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding-block: 22px; border-bottom: 1px solid var(--line-night); }
+.ways svg { width: 36px; height: 36px; color: var(--gold); }
+.ways h3 { font-size: 22px; margin-bottom: 4px; }
+@media (max-width: 900px) { .house-grid { grid-template-columns: 1fr; gap: 40px; } }
+.pillars { margin-top: 88px; }
+.pillars h3.title { font-size: clamp(28px, 3.4vw, 40px); margin-bottom: 34px; }
+.pillar-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.pillar { background: var(--ember); border-radius: 160px 160px 14px 14px; padding: 34px 22px 30px; display: grid; justify-items: center; text-align: center; gap: 10px; }
+.medal { width: 104px; height: 104px; border-radius: 50%; background: #F6F0E4; display: grid; place-items: center; }
+.medal img { width: 78px; height: auto; }
+.pillar h4 { font-family: var(--display); font-size: 26px; margin: 10px 0 0; color: var(--gold); }
+.pillar p { color: var(--cream-muted); font-size: 16px; }
+@media (max-width: 900px) { .pillar-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .pillar-row { gap: 12px; } .pillar { padding: 24px 12px 20px; } .medal { width: 76px; height: 76px; } .medal img { width: 56px; } .pillar h4 { font-size: 21px; } .pillar p { font-size: 14px; } }
 
 /* objetivos */
-.goals { background: var(--surface); }
-.goals-grid { display: grid; grid-template-columns: 0.9fr 1.3fr; gap: 56px; }
-.goals-grid > * { min-width: 0; }
-.goals h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
-.goals ol { margin: 0; padding: 0; counter-reset: g; display: grid; gap: 0; border-top: 1px solid var(--line); }
-.goals li {
-  list-style: none; counter-increment: g; display: grid; grid-template-columns: 64px 1fr; gap: 16px;
-  padding-block: 22px; border-bottom: 1px solid var(--line);
-}
-.goals li::before {
-  content: counter(g, decimal-leading-zero); font-family: var(--font-display); font-style: italic;
-  font-size: 30px; color: var(--gold); line-height: 1.1;
-}
-.goals li strong { display: block; font-family: var(--font-display); font-size: 22px; margin-bottom: 4px; }
-.goals li span { color: var(--muted); }
-@media (max-width: 860px) { .goals-grid { grid-template-columns: 1fr; gap: 28px; } }
+.goals { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 72px; }
+.goals > * { min-width: 0; }
+.goals ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-paper); }
+.goals li { padding-block: 22px; border-bottom: 1px solid var(--line-paper); display: grid; gap: 4px; }
+.goals li strong { font-family: var(--display); font-size: 24px; line-height: 1.2; }
+.goals li span { color: var(--ink-muted); }
+@media (max-width: 900px) { .goals { grid-template-columns: 1fr; gap: 32px; } }
 
-/* vídeo (faixa escura) */
-.film { background: var(--band); color: var(--band-fg); }
-.film-grid { display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: center; }
-.film-grid > * { min-width: 0; }
-.film .eyebrow { color: var(--gold-soft); }
-.film h2 { font-size: clamp(32px, 4.4vw, 54px); margin-block: 14px 18px; }
-.film h2 em { color: var(--gold-soft); }
-.film p { color: var(--band-muted); max-width: 46ch; }
-.film video {
-  width: 100%; max-width: 380px; aspect-ratio: 9 / 16; height: auto; display: block;
-  background: #000; border-radius: 6px; justify-self: center;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(217,168,91,0.25);
-}
-@media (max-width: 860px) { .film-grid { grid-template-columns: 1fr; gap: 36px; } .film video { max-width: 340px; } }
+/* vídeo */
+.film { display: grid; grid-template-columns: 1fr 360px; gap: 72px; align-items: center; }
+.film > * { min-width: 0; }
+.film p { margin-top: 18px; max-width: 44ch; }
+.film video { width: 100%; max-width: 360px; aspect-ratio: 9 / 16; height: auto; display: block; background: #000; border-radius: 180px 180px 18px 18px; justify-self: center; box-shadow: 0 0 0 1px var(--line-night), 0 40px 90px rgba(0,0,0,0.55); }
+@media (max-width: 860px) { .film { grid-template-columns: 1fr; gap: 40px; } .film video { max-width: 320px; } }
 
-/* próximo encontro */
-.meet-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: center; }
-.meet-grid > * { min-width: 0; }
-.meet h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
-.date-card { margin-top: 34px; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; padding-block: 26px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.date-big { text-align: center; padding-right: 28px; border-right: 1px solid var(--line); }
-.date-big .wd { font-size: 12px; font-weight: 600; letter-spacing: 0.26em; color: var(--gold); }
-.date-big .d { font-family: var(--font-display); font-weight: 700; font-size: 84px; line-height: 1; font-variant-numeric: lining-nums; }
-.date-big .m { font-size: 14px; font-weight: 600; letter-spacing: 0.3em; }
-.date-info { display: grid; gap: 12px; }
-.date-info .row { display: flex; gap: 12px; align-items: flex-start; }
-.date-info svg { width: 22px; height: 22px; color: var(--gold); flex: none; margin-top: 3px; }
-.date-info .time { font-family: var(--font-display); font-size: 30px; font-weight: 700; line-height: 1.1; font-variant-numeric: lining-nums; }
-.copy {
-  margin-top: 6px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase; background: none; color: var(--gold); border: 1px solid var(--line);
-  padding: 8px 14px; border-radius: 3px; cursor: pointer;
-}
-.copy:hover { border-color: var(--gold); }
-.ag-lead { margin-top: 14px; color: var(--muted); max-width: 640px; }
-.agenda { list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.ag-item { display: grid; grid-template-columns: 86px 1fr 96px; gap: 20px; align-items: center; padding: 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
-.ag-date { text-align: center; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); padding-right: 16px; }
-.ag-date .d { font-family: var(--font-display); font-weight: 700; font-size: 46px; line-height: 1; color: var(--gold); font-variant-numeric: lining-nums; }
-.ag-date .m { font-size: 13px; font-weight: 600; letter-spacing: 0.26em; margin-top: 6px; }
-.ag-date .wd { font-size: 10.5px; letter-spacing: 0.08em; color: var(--muted); margin-top: 4px; line-height: 1.3; }
-.ag-tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-.ag-body h3 { font-family: var(--font-display); font-size: 22px; line-height: 1.2; margin-top: 6px; }
-.ag-body h3 em { color: var(--gold); }
-.ag-info { font-size: 14px; color: var(--muted); margin-top: 8px; }
-.ag-img { width: 96px; height: 128px; object-fit: cover; border-radius: 4px; box-shadow: 0 8px 22px rgba(0,0,0,0.18); }
-@media (max-width: 860px) { .agenda { grid-template-columns: 1fr; } }
-@media (max-width: 480px) { .ag-item { grid-template-columns: 64px 1fr 72px; gap: 14px; padding: 16px 14px; } .ag-date { padding-right: 10px; } .ag-date .d { font-size: 36px; } .ag-img { width: 72px; height: 96px; } .ag-body h3 { font-size: 18px; } }
-.meet .note { margin-top: 22px; color: var(--muted); }
-.invite img { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto; border-radius: 4px; box-shadow: 0 20px 50px rgba(20,18,16,0.18); }
-@media (max-width: 860px) { .meet-grid { grid-template-columns: 1fr; gap: 40px; } }
-@media (max-width: 480px) {
-  .date-card { grid-template-columns: 1fr; gap: 18px; }
-  .date-big { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+/* agenda */
+.agenda-head { display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: end; justify-content: space-between; }
+.agenda-head p { max-width: 46ch; }
+.agenda { list-style: none; margin: 48px 0 0; padding: 0; border-top: 2px solid var(--ink); }
+.ag { display: grid; grid-template-columns: 150px 1fr 110px; gap: 28px; align-items: center; padding-block: 24px; border-bottom: 1px solid var(--line-paper); }
+.ag-date { display: grid; gap: 2px; }
+.ag-date .d { font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 0.9; font-variant-numeric: lining-nums; }
+.ag-date .m { font-weight: 600; font-size: 15px; }
+.ag-date .wd { font-size: 14px; color: var(--ink-muted); }
+.ag-date.tbd .d { font-size: 30px; font-style: italic; font-weight: 600; color: var(--gold-ink); line-height: 1.1; }
+.ag-tag { font-size: 14px; font-weight: 600; color: var(--gold-ink); }
+.ag h3 { font-size: clamp(22px, 2.6vw, 30px); margin-top: 4px; }
+.ag-info { margin-top: 6px; color: var(--ink-muted); font-size: 15px; }
+.ag img { width: 110px; height: 140px; object-fit: cover; border-radius: 10px; justify-self: end; }
+@media (max-width: 640px) {
+  .ag { grid-template-columns: 1fr 84px; gap: 6px 18px; }
+  .ag-date { grid-column: 1 / -1; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .ag-date .d { font-size: 44px; }
+  .ag-date.tbd .d { font-size: 24px; }
+  .ag img { width: 84px; height: 108px; grid-row: 2; grid-column: 2; }
 }
 
-/* versículo */
-.verse { background: var(--band); color: var(--band-fg); text-align: center; }
-.verse blockquote { margin: 0 auto; max-width: 26ch; font-family: var(--font-display); font-style: italic; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.25; }
-.verse blockquote::before { content: "“"; display: block; color: var(--gold-soft); font-size: 1.8em; line-height: 0.6; margin-bottom: 18px; font-style: normal; }
-.verse cite { display: block; margin-top: 26px; font-style: normal; font-size: 13px; letter-spacing: 0.3em; color: var(--gold-soft); }
+/* move social */
+.social { background: var(--wine); color: var(--cream); }
+.social .wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 72px; align-items: center; }
+.social .wrap > * { min-width: 0; }
+.social .kicker { color: #F0C98B; }
+.social-logo { width: min(320px, 80%); height: auto; display: block; margin: 0 auto; }
+.social .text { display: grid; gap: 16px; margin-top: 22px; color: #EAD9C8; }
+.action { margin-top: 32px; display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: center; padding: 16px; border-radius: 14px; background: rgba(0,0,0,0.22); }
+.action img { width: 96px; height: 96px; object-fit: contain; background: #fff; border-radius: 10px; }
+.action .when { font-size: 14px; font-weight: 600; color: #F0C98B; }
+.action h3 { font-size: 24px; margin: 2px 0; }
+.action p { color: #EAD9C8; font-size: 15px; }
+@media (max-width: 860px) { .social .wrap { grid-template-columns: 1fr; gap: 36px; } }
 
-/* redes / contato */
-.connect { text-align: center; }
-.connect h2 { font-size: clamp(32px, 4.4vw, 54px); margin-block: 14px 16px; }
-.connect h2 em { color: var(--gold); }
-.connect .sub { color: var(--muted); max-width: 54ch; margin: 0 auto; }
-.links { margin-top: 38px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 900px; margin-inline: auto; }
-.link-card {
-  display: grid; gap: 6px; justify-items: center; padding: 28px 18px; text-decoration: none;
-  border: 1px solid var(--line); border-radius: 4px; background: var(--bg);
-}
-a.link-card:hover { border-color: var(--gold); }
-.link-card svg { width: 30px; height: 30px; color: var(--gold); }
-.link-card strong { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; }
-.link-card span { color: var(--muted); font-size: 15px; }
-@media (max-width: 700px) { .links { grid-template-columns: 1fr; } }
-.manifesto {
-  margin: 56px auto 0; display: inline-block; border: 1.5px solid var(--gold); padding: 18px 40px;
-  font-size: 14px; letter-spacing: 0.32em; line-height: 1.9; text-transform: uppercase;
-}
-.manifesto b { color: var(--gold); font-weight: 600; }
-
-/* move store (em breve) */
-.social-sec .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
-.social-sec .wrap > * { min-width: 0; }
-.social-logo { width: min(340px, 80%); height: auto; margin: 0 auto; }
-.social-sec .logo-wrap { text-align: center; }
-.social-sec h2 { font-size: clamp(32px, 4.2vw, 50px); margin-top: 14px; }
-.social-sec h2 em { color: var(--gold); }
-.social-sec .text { display: grid; gap: 16px; color: var(--muted); margin-top: 20px; }
-.social-sec .text p:first-child { color: var(--fg); font-size: 19px; }
-.action { margin-top: 30px; display: grid; grid-template-columns: 120px 1fr; gap: 22px; align-items: center; border: 1px solid var(--line); border-radius: 6px; padding: 18px; background: var(--surface); }
-.action img { width: 120px; height: 120px; object-fit: contain; background: #fff; border-radius: 6px; }
-.action .when { font-size: 12.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-.action h3 { font-size: 24px; margin: 4px 0; }
-.action p { color: var(--muted); font-size: 15px; }
-@media (max-width: 860px) { .social-sec .wrap { grid-template-columns: 1fr; gap: 32px; } }
-@media (max-width: 480px) { .action { grid-template-columns: 84px 1fr; } .action img { width: 84px; height: 84px; } }
-.store { background: var(--surface); }
-.store-head { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; margin-bottom: 44px; }
+/* move store */
+.store-head { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; margin-bottom: 48px; }
 .store-head > * { min-width: 0; }
-.store-logo { width: 150px; height: auto; }
-.store h2 { font-size: clamp(32px, 4.4vw, 54px); margin-block: 12px 14px; }
-.store h2 em { color: var(--gold); }
-.store .sub { color: var(--muted); max-width: 58ch; }
-.soon { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--gold); border-radius: 999px; padding: 6px 14px; }
-.products { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.product { margin: 0; position: relative; display: grid; gap: 10px; }
-.product .pic { position: relative; border-radius: 4px; overflow: hidden; aspect-ratio: 3 / 4; background: #e9e6e1; }
+.store-logo { width: 140px; height: auto; }
+.store-head p { margin-top: 14px; max-width: 58ch; }
+.soon { display: inline-block; font-size: 13px; font-weight: 600; color: #fff; background: var(--wine); border-radius: 999px; padding: 5px 12px; }
+.products { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.product { margin: 0; display: grid; gap: 12px; }
+.product .pic { position: relative; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 14px; background: #e6e1d9; }
 .product img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.product .pic .soon { position: absolute; top: 12px; left: 12px; font-size: 10.5px; padding: 5px 11px; }
-.product figcaption strong { display: block; font-size: 15px; font-weight: 600; }
-.product figcaption span { color: var(--muted); font-size: 14px; }
-.store .follow { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; color: var(--muted); }
-.store .follow b { color: var(--fg); font-size: 18px; letter-spacing: 0.04em; }
+.product .soon { position: absolute; top: 12px; left: 12px; }
+.product strong { display: block; font-size: 16px; }
+.product span.k { color: var(--ink-muted); font-size: 14px; }
+.follow { margin-top: 36px; color: var(--ink-muted); }
+.follow b { color: var(--ink); }
 @media (max-width: 900px) { .products { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .store-head { grid-template-columns: 1fr; gap: 20px; } .store-logo { width: 120px; } }
+@media (max-width: 560px) { .store-head { grid-template-columns: 1fr; gap: 18px; } .store-logo { width: 110px; } }
 
-/* botão de música de fundo */
+/* versículo + contato */
+.verse { text-align: center; }
+.verse blockquote { margin: 0 auto; max-width: 24ch; font-family: var(--display); font-style: italic; font-size: clamp(30px, 4.4vw, 54px); line-height: 1.22; color: var(--cream); }
+.verse cite { display: block; margin-top: 22px; font-style: normal; font-size: 16px; color: var(--gold); }
+.connect { margin-top: 96px; padding-top: 72px; border-top: 1px solid var(--line-night); display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; text-align: left; }
+.connect > * { min-width: 0; }
+.connect p.muted { margin-top: 16px; max-width: 46ch; }
+.links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line-night); }
+.links li { display: grid; grid-template-columns: 32px 1fr auto; gap: 16px; align-items: center; padding-block: 18px; border-bottom: 1px solid var(--line-night); }
+.links svg { width: 26px; height: 26px; color: var(--gold); }
+.links strong { font-weight: 600; }
+.links span { color: var(--cream-muted); font-size: 15px; }
+@media (max-width: 860px) { .connect { grid-template-columns: 1fr; gap: 32px; } }
+
+footer { background: var(--night); color: var(--cream-muted); border-top: 1px solid var(--line-night); }
+footer .wrap { padding-block: 34px calc(34px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; font-size: 15px; }
+footer .brand { display: flex; align-items: center; gap: 16px; }
+footer img { height: 52px; width: auto; }
+footer strong { color: var(--cream); font-family: var(--display); font-size: 18px; display: block; }
+
+/* música */
 .music-btn {
-  position: fixed; z-index: 20;
-  right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-  color: #F2EADC; background: #0E0C09; border: 1.5px solid #D9A85B; border-radius: 999px;
-  padding: 12px 18px 12px 14px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: fixed; z-index: 20; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px; font: 600 14px var(--body);
+  color: var(--cream); background: var(--night); border: 1.5px solid var(--gold); border-radius: 999px;
+  padding: 12px 18px 12px 14px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
-.music-btn:hover { background: #1F1810; }
-.music-btn svg { width: 22px; height: 22px; color: #D9A85B; flex: none; }
+.music-btn:hover { background: var(--ember); }
+.music-btn svg { width: 22px; height: 22px; color: var(--gold); flex: none; }
 .music-btn .bars { display: none; align-items: flex-end; gap: 3px; height: 16px; }
-.music-btn .bars i { width: 3px; background: #D9A85B; border-radius: 2px; height: 30%; animation: eq 0.9s ease-in-out infinite; }
+.music-btn .bars i { width: 3px; background: var(--gold); border-radius: 2px; height: 30%; animation: eq 0.9s ease-in-out infinite; }
 .music-btn .bars i:nth-child(2) { animation-delay: 0.2s; }
 .music-btn .bars i:nth-child(3) { animation-delay: 0.4s; }
 .music-btn.playing .bars { display: inline-flex; }
@@ -386,41 +323,20 @@ a.link-card:hover { border-color: var(--gold); }
 @keyframes eq { 0%, 100% { height: 30%; } 50% { height: 100%; } }
 @media (prefers-reduced-motion: reduce) { .music-btn .bars i { animation: none; height: 70%; } }
 @media (max-width: 480px) { .music-btn .label { display: none; } .music-btn { padding: 12px; } }
-
-footer { border-top: 1px solid var(--line); }
-footer .wrap { padding-block: 34px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; color: var(--muted); font-size: 14px; }
-footer img { height: 54px; width: auto; }
-footer .brand { display: flex; align-items: center; gap: 16px; }
-footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-/* estrutura: projeto principal e braços */
-.family { margin-top: 34px; border: 1px solid var(--line); border-radius: 4px; padding: 22px 24px; display: grid; gap: 16px; background: var(--surface); }
-.family .label { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
-.family .root { display: flex; align-items: center; gap: 16px; }
-.family .root img { height: 64px; width: auto; }
-.family .root strong { font-family: var(--font-display); font-size: 22px; display: block; }
-.family .root span { color: var(--muted); font-size: 15px; }
-.family .branch { display: flex; align-items: center; gap: 16px; padding-left: 30px; position: relative; flex-wrap: wrap; }
-.family .branch::before { content: ""; position: absolute; left: 10px; top: -16px; bottom: 50%; width: 14px; border-left: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); }
-.family .branch img { height: 46px; width: auto; }
-.family .badge { font-size: 11.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 4px 12px; }
 </style>
 </head>
 <body>
 
-
 <header class="top">
   <div class="wrap">
-    <a href="#inicio" aria-label="Mover dos Filhos — início">
-      <img class="logo-light" src="img/mover_claro.png" alt="Mover dos Filhos">
-      <img class="logo-dark" src="img/mover_escuro.png" alt="Mover dos Filhos">
-    </a>
-    <nav aria-label="Seções">
+    <a class="brand" href="#inicio" aria-label="Mover dos Filhos, voltar ao início"><img src="img/mover_escuro.png" alt="Mover dos Filhos"></a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav id="menu" aria-label="Seções">
       <a href="#quem-somos">Quem somos</a>
       <a href="#historia">Nossa história</a>
       <a href="#the-house">The House</a>
-      <a href="#pilares">Pilares</a>
       <a href="#objetivos">Objetivos</a>
-      <a href="#encontro">Agenda</a>
+      <a href="#agenda">Agenda</a>
       <a href="#move-social">Move Social</a>
       <a href="#move-store">Move Store</a>
       <a href="#contato">Contato</a>
@@ -429,284 +345,276 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
 </header>
 
 <main id="inicio">
-  <div class="hero">
+  <section class="night hero" aria-labelledby="titulo">
     <div class="wrap">
-      <div class="hero-parent">
-        <img src="img/mover_escuro.png" alt="Mover dos Filhos">
-        <span>apresenta</span>
+      <div>
+        <p class="presents"><img src="img/mover_escuro.png" alt="Mover dos Filhos"> apresenta o The House</p>
+        <h1 id="titulo" class="crescendo"><span class="c1">Uma casa,</span><span class="c2">um altar,</span><span class="c3">um mover.</span></h1>
+        <p class="lede">A rotina tenta nos consumir. Mas existe um lugar onde as tensões são aliviadas e a gente se rende na presença de Deus. Começamos na minha casa, depois na sua.</p>
+        <div class="ctas">
+          <a class="btn btn-solid" href="#agenda">Ver a agenda</a>
+          <a class="btn btn-ghost" href="#video">Assistir ao vídeo</a>
+        </div>
       </div>
-      <div class="hero-sep" aria-hidden="true"></div>
-      <img class="hero-logo" src="img/thehouse_escuro.png" alt="The House (A Casa)">
-      <p class="arm-tag"><span>Um braço do <b>Mover dos Filhos</b></span><i aria-hidden="true"></i><span>Começando agora</span></p>
-      <h1><span class="l1">Uma casa,</span><span class="l2">um altar,</span><span class="l3">um mover.</span></h1>
-      <p class="pillars-line">Oração <b>•</b> Presença <b>•</b> Dons <b>•</b> Ativação</p>
-      <p class="lead">A rotina tenta nos consumir. Mas existe um lugar onde as tensões são aliviadas e a gente se rende na presença de Deus. Começamos na minha casa, depois na sua.</p>
-      <div class="ctas">
-        <a class="btn btn-solid" href="#encontro">Nossa agenda</a>
-        <a class="btn btn-ghost" href="#video">Assistir ao vídeo</a>
+      <div class="house-mark">
+        <img src="img/thehouse_escuro.png" alt="The House (A Casa)">
+        <div class="pills" aria-label="Pilares"><span>Oração</span><span>Presença</span><span>Dons</span><span>Ativação</span></div>
+        <p>Um braço do Mover dos Filhos que está começando agora.</p>
       </div>
     </div>
-  </div>
-
-  <section id="quem-somos">
-    <div class="wrap about">
-      <div>
-        <p class="eyebrow">Quem somos · Mover dos Filhos</p>
-        <h2>Não é uma igreja. <em>É um movimento.</em></h2>
-        <div class="text" style="margin-top:24px">
-          <p>O Mover dos Filhos é um movimento de pessoas que decidiram sair do automático do dia a dia para buscar a Deus juntas, no mesmo propósito.</p>
-          <p>Nos reunimos em casas, em volta de uma mesa, de um violão e da Palavra. Ali oramos, adoramos e esperamos em Deus para receber um novo nível de palavra, de visão e de propósito para as nossas vidas.</p>
-          <p>Não substituímos a sua igreja local. Queremos que cada casa se torne um altar e que cada pessoa leve esse mover para onde ela vive.</p>
-        </div>
-        <div class="family" aria-label="Estrutura do projeto">
-          <div class="label">Como estamos organizados</div>
-          <div class="root">
-            <img class="logo-light" src="img/mover_claro.png" alt="">
-            <img class="logo-dark" src="img/mover_escuro.png" alt="">
-            <div><strong>Mover dos Filhos</strong><span>O projeto principal</span></div>
-          </div>
-          <div class="branch">
-            <img class="logo-light" src="img/thehouse_claro.png" alt="The House">
-            <img class="logo-dark" src="img/thehouse_escuro.png" alt="The House">
-            <span class="badge">Primeiro braço · em início</span>
-          </div>
-          <div class="branch">
-            <img class="logo-light" src="img/movesocial_h_claro.png" alt="Move Social" style="height:44px">
-            <img class="logo-dark" src="img/movesocial_h_escuro.png" alt="Move Social" style="height:44px">
-            <span class="badge">Braço de ações sociais</span>
-          </div>
-          <div class="branch">
-            <img class="logo-light" src="img/movestore_claro.png" alt="Move Store" style="height:52px">
-            <img class="logo-dark" src="img/movestore_escuro.png" alt="Move Store" style="height:52px">
-            <span class="badge">Em breve</span>
-          </div>
-        </div>
-      </div>
-      <figure class="photo" style="margin:0">
+    <div class="wrap window-wrap">
+      <figure class="window" style="margin:0">
         <img src="img/grupo.jpg" alt="Grupo reunido em uma sala de estar, orando e adorando com violão e velas acesas" width="941" height="405">
-        <figcaption>Um encontro The House: oração, adoração e comunhão em casa.</figcaption>
+        <figcaption>Oração, adoração e comunhão em casa.</figcaption>
       </figure>
     </div>
   </section>
 
-  <section id="historia" class="story">
-    <div class="wrap story-grid">
+  <section id="quem-somos" class="paper band">
+    <div class="wrap about">
       <div>
-        <p class="eyebrow">Nossa história</p>
-        <h2>Tudo começou com amigos que decidiram <em>não caminhar sozinhos.</em></h2>
-        <div class="intro">
-          <p>Em 2024, olhamos ao nosso redor e vimos amigos, irmãos e parentes precisando de ajuda, de incentivo e de acolhimento.</p>
-          <p>Entendemos isso como um chamado. Começamos a nos reunir para que um desse força ao outro, um desse apoio ao outro, e construir juntos algo maior do que cada um de nós.</p>
+        <p class="kicker">Quem somos</p>
+        <h2 class="h2">Não é uma igreja. É um movimento.</h2>
+        <div class="text">
+          <p class="lede">O Mover dos Filhos é um movimento de pessoas que decidiram sair do automático do dia a dia para buscar a Deus juntas, no mesmo propósito.</p>
+          <p class="muted">Nos reunimos em casas, em volta de uma mesa, de um violão e da Palavra. Ali oramos, adoramos e esperamos em Deus para receber um novo nível de palavra, de visão e de propósito para as nossas vidas.</p>
+          <p class="muted">Não substituímos a sua igreja local. Queremos que cada casa se torne um altar e que cada pessoa leve esse mover para onde ela vive.</p>
         </div>
       </div>
-      <ol class="timeline">
-        <li>
-          <span class="when">2024 · O começo</span>
-          <h3>Amigos e irmãos que se reuniram</h3>
-          <p>Pessoas que precisavam de cuidado encontraram umas nas outras força, apoio e acolhimento. Foi assim que o Mover dos Filhos nasceu.</p>
-        </li>
-        <li>
-          <span class="when">2024 · Nos lares</span>
-          <h3>Os primeiros movimentos nas casas</h3>
-          <p>As portas se abriram e os primeiros encontros aconteceram nos lares, com oração, Palavra e cuidado uns com os outros.</p>
-          <a class="photos-link" href="confraternizacao-2024/index.html#bastidores">
-            <div class="thumbs" aria-hidden="true">
-              <img src="confraternizacao-2024/bastidores/miniaturas/b-01.jpg" alt="">
-              <img src="confraternizacao-2024/bastidores/miniaturas/b-02.jpg" alt="">
-              <img src="confraternizacao-2024/bastidores/miniaturas/b-03.jpg" alt="">
-            </div>
-            <span>Veja os bastidores do nosso começo →<small>11 fotos dos encontros e da preparação</small></span>
-          </a>
-        </li>
-        <li>
-          <span class="when">Fim de 2024 · Celebração</span>
-          <h3>A Confraternização dos Filhos</h3>
-          <p>Fechamos o ano juntos, celebrando e agradecendo a Deus por tudo o que Ele tinha começado.</p>
-          <a class="photos-link" href="confraternizacao-2024/index.html">
-            <div class="thumbs" aria-hidden="true">
-              <img src="confraternizacao-2024/miniaturas/foto-01.jpg" alt="">
-              <img src="confraternizacao-2024/miniaturas/foto-02.jpg" alt="">
-              <img src="confraternizacao-2024/miniaturas/foto-03.jpg" alt="">
-            </div>
-            <span>Acesse as fotos da confraternização →<small>15 fotos e o vídeo do nosso dia</small></span>
-          </a>
-        </li>
-        <li class="now">
-          <span class="when">Hoje · O próximo passo</span>
-          <h3>Nasce o The House</h3>
-          <p>O movimento ganha seu primeiro braço: encontros nas casas para buscar a presença de Deus. E a Move Store está a caminho.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="the-house" class="house">
-    <div class="wrap house-grid">
-      <div>
-        <p class="eyebrow">The House · um braço do Mover dos Filhos</p>
-        <h2>Começamos na minha casa, depois na sua.</h2>
-        <div class="intro" style="margin-top:22px">
-          <p>The House (A Casa) é um braço do Mover dos Filhos que está começando agora. São encontros simples, em casas, com pessoas buscando a presença de Deus sem pressa.</p>
-          <p>Não precisa de palco nem de estrutura. Precisa de um lugar aberto e de corações dispostos.</p>
+      <div class="tree" aria-label="Como estamos organizados">
+        <h3>Como estamos organizados</h3>
+        <div class="root">
+          <img class="logo-light" src="img/mover_claro.png" alt="">
+          <img class="logo-dark" src="img/mover_escuro.png" alt="">
+          <div><strong>Mover dos Filhos</strong><p class="muted">O projeto principal</p></div>
         </div>
-      </div>
-      <div class="where">
         <ul>
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M12 17.2s-3-1.9-3-3.9a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.9-3 3.9z"/></svg>
-            <div><h3>Pode ser na sua casa</h3><p>Abra a porta da sua sala e transforme o lugar onde você vive em um altar.</p></div>
+            <span><img class="logo-light" src="img/thehouse_claro.png" alt="The House"><img class="logo-dark" src="img/thehouse_escuro.png" alt="The House"></span>
+            <p><strong>The House</strong><span class="muted">Primeiro braço, em início</span></p>
           </li>
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3"/><circle cx="5.5" cy="9.5" r="2.3"/><circle cx="18.5" cy="9.5" r="2.3"/><path d="M6.5 20v-2.5a5.5 5.5 0 0 1 11 0V20"/><path d="M2 19.5v-1.3a3.6 3.6 0 0 1 4.3-3.5M22 19.5v-1.3a3.6 3.6 0 0 0-4.3-3.5"/></svg>
-            <div><h3>Pode ser com amigos</h3><p>Chame quem está perto de você. A presença de Deus não é para ser vivida sozinha.</p></div>
+            <span><img class="logo-light" src="img/movesocial_h_claro.png" alt="Move Social"><img class="logo-dark" src="img/movesocial_h_escuro.png" alt="Move Social"></span>
+            <p><strong>Move Social</strong><span class="muted">Braço de ações sociais</span></p>
           </li>
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-8-4.9-8-10.6A4.4 4.4 0 0 1 12 7.4a4.4 4.4 0 0 1 8 2.5c0 5.7-8 10.6-8 10.6z"/></svg>
-            <div><h3>Pode ser o mover</h3><p>Aquilo que recebemos, levamos. Cada encontro é o começo de outro.</p></div>
+            <span><img class="logo-light" src="img/movestore_claro.png" alt="Move Store"><img class="logo-dark" src="img/movestore_escuro.png" alt="Move Store"></span>
+            <p><strong>Move Store</strong><span class="muted">Em breve</span></p>
           </li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section id="pilares">
+  <section id="historia" class="paper-2 band">
     <div class="wrap">
-      <div class="pillars-head">
-        <p class="eyebrow">Nossos pilares</p>
-        <h2>Quatro marcas de cada encontro</h2>
-      </div>
-      <div class="pillars">
-        <div class="pillar">
-          <div class="medal"><img src="img/icon_oracao.png" alt=""></div>
-          <h3>Oração</h3><p>Voltar ao lugar secreto.</p>
-        </div>
-        <div class="pillar">
-          <div class="medal"><img src="img/icon_presenca.png" alt=""></div>
-          <h3>Presença</h3><p>Buscar a Deus acima de tudo.</p>
-        </div>
-        <div class="pillar">
-          <div class="medal"><img src="img/icon_dons.png" alt=""></div>
-          <h3>Dons</h3><p>Despertar e desenvolver.</p>
-        </div>
-        <div class="pillar">
-          <div class="medal"><img src="img/icon_ativacao.png" alt=""></div>
-          <h3>Ativação</h3><p>Aquilo que recebemos, levamos.</p>
+      <div class="story-head">
+        <p class="kicker">Nossa história</p>
+        <h2 class="h2">Tudo começou com amigos que decidiram não caminhar sozinhos.</h2>
+        <div class="text">
+          <p class="lede">Em 2024, olhamos ao nosso redor e vimos amigos, irmãos e parentes precisando de ajuda, de incentivo e de acolhimento.</p>
+          <p class="muted">Entendemos isso como um chamado. Começamos a nos reunir para que um desse força ao outro, um desse apoio ao outro, e construir juntos algo maior do que cada um de nós.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section id="objetivos" class="goals">
-    <div class="wrap goals-grid">
-      <div>
-        <p class="eyebrow">Objetivos</p>
-        <h2>Por que nos reunimos</h2>
-      </div>
-      <ol>
-        <li><div><strong>Tirar as pessoas da rotina</strong><span>Criar um lugar onde a correria do dia a dia dá espaço para a presença de Deus.</span></div></li>
-        <li><div><strong>Levantar altares nas casas</strong><span>Fazer de cada lar um lugar de oração e adoração, onde a família e os amigos buscam a Deus juntos.</span></div></li>
-        <li><div><strong>Unir pessoas no mesmo propósito</strong><span>Viver a fé em comunhão, sustentando uns aos outros em oração.</span></div></li>
-        <li><div><strong>Despertar e desenvolver dons</strong><span>Ajudar cada pessoa a reconhecer e usar o que Deus colocou nela.</span></div></li>
-        <li><div><strong>Multiplicar o mover</strong><span>Que quem recebe em uma casa leve o mover para a próxima.</span></div></li>
+      <ol class="timeline">
+        <li>
+          <span class="when">2024, o começo</span>
+          <h3>Amigos e irmãos que se reuniram</h3>
+          <p>Pessoas que precisavam de cuidado encontraram umas nas outras força, apoio e acolhimento. Foi assim que o Mover dos Filhos nasceu.</p>
+        </li>
+        <li>
+          <span class="when">2024, nos lares</span>
+          <h3>Os primeiros encontros nas casas</h3>
+          <p>As portas se abriram e os primeiros encontros aconteceram nos lares, com oração, Palavra e cuidado uns com os outros.</p>
+          <a class="photos-link" href="confraternizacao-2024/index.html#bastidores">
+            <span class="thumbs" aria-hidden="true">
+              <img src="confraternizacao-2024/bastidores/miniaturas/b-01.jpg" alt="">
+              <img src="confraternizacao-2024/bastidores/miniaturas/b-02.jpg" alt="">
+              <img src="confraternizacao-2024/bastidores/miniaturas/b-03.jpg" alt="">
+            </span>
+            <span>Ver os bastidores<small>11 fotos dos encontros</small></span>
+          </a>
+        </li>
+        <li>
+          <span class="when">Fim de 2024, celebração</span>
+          <h3>A Confraternização dos Filhos</h3>
+          <p>Fechamos o ano juntos, celebrando e agradecendo a Deus por tudo o que Ele tinha começado.</p>
+          <a class="photos-link" href="confraternizacao-2024/index.html">
+            <span class="thumbs" aria-hidden="true">
+              <img src="confraternizacao-2024/miniaturas/foto-01.jpg" alt="">
+              <img src="confraternizacao-2024/miniaturas/foto-02.jpg" alt="">
+              <img src="confraternizacao-2024/miniaturas/foto-03.jpg" alt="">
+            </span>
+            <span>Ver as fotos da festa<small>15 fotos e o vídeo do dia</small></span>
+          </a>
+        </li>
+        <li class="now">
+          <span class="when">Hoje, o próximo passo</span>
+          <h3>Nasce o The House</h3>
+          <p>O movimento ganha seu primeiro braço: encontros nas casas para buscar a presença de Deus. E a Move Store está a caminho.</p>
+        </li>
       </ol>
+      <div class="mural" aria-label="Fotos dos nossos encontros">
+        <img src="confraternizacao-2024/bastidores/miniaturas/b-02.jpg" alt="Grupo reunido em uma casa durante um dos primeiros encontros" loading="lazy">
+        <img src="confraternizacao-2024/miniaturas/foto-02.jpg" alt="Amigos na Confraternização dos Filhos em 2024" loading="lazy">
+        <img src="confraternizacao-2024/bastidores/miniaturas/b-03.jpg" alt="Ensaio da banda antes de um encontro" loading="lazy">
+        <img src="confraternizacao-2024/miniaturas/foto-05.jpg" alt="Família na Confraternização dos Filhos" loading="lazy">
+        <img src="confraternizacao-2024/bastidores/miniaturas/b-01.jpg" alt="Selfie do grupo depois de um encontro" loading="lazy">
+        <img src="confraternizacao-2024/miniaturas/foto-14.jpg" alt="Participantes reunidos na Confraternização" loading="lazy">
+      </div>
     </div>
   </section>
 
-  <section id="video" class="film">
-    <div class="wrap film-grid">
-      <div>
-        <p class="eyebrow">Assista</p>
-        <h2>Existe um lugar. <em>Uma casa.</em></h2>
-        <p>Um minuto sobre por que vale a pena sair da rotina e se reunir para adorar a Deus no mesmo propósito.</p>
+  <section id="the-house" class="night band">
+    <div class="wrap">
+      <div class="house-grid">
+        <div>
+          <p class="kicker">The House, um braço do Mover dos Filhos</p>
+          <h2 class="h2">Começamos na minha casa, depois na sua.</h2>
+          <div class="text">
+            <p class="lede">The House (A Casa) é um braço do Mover dos Filhos que está começando agora. São encontros simples, em casas, com pessoas buscando a presença de Deus sem pressa.</p>
+            <p class="muted">Não precisa de palco nem de estrutura. Precisa de um lugar aberto e de corações dispostos.</p>
+          </div>
+        </div>
+        <ul class="ways">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M12 17.2s-3-1.9-3-3.9a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.9-3 3.9z"/></svg>
+            <div><h3>Pode ser na sua casa</h3><p class="muted">Abra a porta da sua sala e transforme o lugar onde você vive em um altar.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3"/><circle cx="5.5" cy="9.5" r="2.3"/><circle cx="18.5" cy="9.5" r="2.3"/><path d="M6.5 20v-2.5a5.5 5.5 0 0 1 11 0V20"/><path d="M2 19.5v-1.3a3.6 3.6 0 0 1 4.3-3.5M22 19.5v-1.3a3.6 3.6 0 0 0-4.3-3.5"/></svg>
+            <div><h3>Pode ser com amigos</h3><p class="muted">Chame quem está perto de você. A presença de Deus não é para ser vivida sozinha.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-8-4.9-8-10.6A4.4 4.4 0 0 1 12 7.4a4.4 4.4 0 0 1 8 2.5c0 5.7-8 10.6-8 10.6z"/></svg>
+            <div><h3>Pode ser o mover</h3><p class="muted">Aquilo que recebemos, levamos. Cada encontro é o começo de outro.</p></div>
+          </li>
+        </ul>
       </div>
-      <video controls playsinline preload="metadata" poster="img/video-capa.jpg" aria-label="Vídeo The House">
+
+      <div class="pillars" id="pilares">
+        <h3 class="title">Quatro marcas de cada encontro</h3>
+        <div class="pillar-row">
+          <div class="pillar"><div class="medal"><img src="img/icon_oracao.png" alt=""></div><h4>Oração</h4><p>Voltar ao lugar secreto.</p></div>
+          <div class="pillar"><div class="medal"><img src="img/icon_presenca.png" alt=""></div><h4>Presença</h4><p>Buscar a Deus acima de tudo.</p></div>
+          <div class="pillar"><div class="medal"><img src="img/icon_dons.png" alt=""></div><h4>Dons</h4><p>Despertar e desenvolver.</p></div>
+          <div class="pillar"><div class="medal"><img src="img/icon_ativacao.png" alt=""></div><h4>Ativação</h4><p>Aquilo que recebemos, levamos.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="objetivos" class="paper band">
+    <div class="wrap goals">
+      <div>
+        <p class="kicker">Objetivos</p>
+        <h2 class="h2">Por que nos reunimos</h2>
+      </div>
+      <ul>
+        <li><strong>Tirar as pessoas da rotina</strong><span>Criar um lugar onde a correria do dia a dia dá espaço para a presença de Deus.</span></li>
+        <li><strong>Levantar altares nas casas</strong><span>Fazer de cada lar um lugar de oração e adoração, onde a família e os amigos buscam a Deus juntos.</span></li>
+        <li><strong>Unir pessoas no mesmo propósito</strong><span>Viver a fé em comunhão, sustentando uns aos outros em oração.</span></li>
+        <li><strong>Despertar e desenvolver dons</strong><span>Ajudar cada pessoa a reconhecer e usar o que Deus colocou nela.</span></li>
+        <li><strong>Multiplicar o mover</strong><span>Que quem recebe em uma casa leve o mover para a próxima.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="video" class="night band">
+    <div class="wrap film">
+      <div>
+        <p class="kicker">Assista</p>
+        <h2 class="h2">Existe um lugar. Uma casa.</h2>
+        <p class="muted">Um minuto sobre por que vale a pena sair da rotina e se reunir para adorar a Deus no mesmo propósito.</p>
+      </div>
+      <video controls playsinline preload="metadata" poster="img/video-capa.jpg" aria-label="Vídeo do The House">
         <source src="video/the-house.mp4" type="video/mp4">
       </video>
     </div>
   </section>
 
-  <section id="encontro" class="meet">
+  <section id="agenda" class="paper band">
     <div class="wrap">
-      <p class="eyebrow">Nossa agenda</p>
-      <h2>Novembro e Dezembro</h2>
-      <p class="ag-lead">Anote na agenda e venha com a gente. Traga alguém com você: todos são bem-vindos.</p>
+      <div class="agenda-head">
+        <div>
+          <p class="kicker">Nossa agenda</p>
+          <h2 class="h2">Novembro e dezembro</h2>
+        </div>
+        <p class="muted">Anote na agenda e venha com a gente. Traga alguém com você: todos são bem-vindos.</p>
+      </div>
       <ul class="agenda">
-        <li class="ag-item">
-          <div class="ag-date"><span class="d">★</span><span class="m">NOV</span><span class="wd">Data a definir</span></div>
-          <div class="ag-body">
+        <li class="ag">
+          <div class="ag-date tbd"><span class="d">Em breve</span><span class="m">Novembro</span><span class="wd">Data a definir</span></div>
+          <div>
             <p class="ag-tag">Move Cine · The Chosen</p>
-            <h3>Inauguração da 6ª Temporada · <em>Episódio 2</em></h3>
-            <p class="ag-info">Terraço do Bravo Zulu · Waldenir</p>
+            <h3>Inauguração da 6ª temporada, episódio 2</h3>
+            <p class="ag-info">Terraço do Bravo Zulu, Waldenir</p>
           </div>
-          <img class="ag-img" src="img/ag-thechosen.jpg" alt="Cartaz de The Chosen, 6ª temporada" width="360" height="480" loading="lazy">
+          <img src="img/ag-thechosen.jpg" alt="Cartaz de The Chosen, 6ª temporada" width="360" height="480" loading="lazy">
         </li>
-        <li class="ag-item">
-          <div class="ag-date"><span class="d">20</span><span class="m">NOV</span><span class="wd">Sexta-feira</span></div>
-          <div class="ag-body">
+        <li class="ag">
+          <div class="ag-date"><span class="d">20</span><span class="m">Novembro</span><span class="wd">Sexta-feira</span></div>
+          <div>
             <p class="ag-tag">Evangelismo</p>
-            <h3>Manifestação <em>dos Filhos</em></h3>
-            <p class="ag-info">A partir das 9h · Penha</p>
+            <h3>Manifestação dos Filhos</h3>
+            <p class="ag-info">A partir das 9h, na Penha</p>
           </div>
-          <img class="ag-img" src="img/ag-manifestacao.jpg" alt="Arte da Manifestação dos Filhos" width="360" height="480" loading="lazy">
+          <img src="img/ag-manifestacao.jpg" alt="Arte da Manifestação dos Filhos" width="360" height="480" loading="lazy">
         </li>
-        <li class="ag-item">
-          <div class="ag-date"><span class="d">27</span><span class="m">NOV</span><span class="wd">Sexta-feira</span></div>
-          <div class="ag-body">
+        <li class="ag">
+          <div class="ag-date"><span class="d">27</span><span class="m">Novembro</span><span class="wd">Sexta-feira</span></div>
+          <div>
             <p class="ag-tag">The House · Posse</p>
-            <h3>Com a presença do <em>Pastor Feitosa</em></h3>
+            <h3>Com a presença do Pastor Feitosa</h3>
             <p class="ag-info">Às 19h30</p>
           </div>
-          <img class="ag-img" src="img/ag-pastor-feitosa.jpg" alt="Foto do Pastor Feitosa" width="360" height="480" loading="lazy">
+          <img src="img/ag-pastor-feitosa.jpg" alt="Foto do Pastor Feitosa" width="360" height="480" loading="lazy">
         </li>
-        <li class="ag-item">
-          <div class="ag-date"><span class="d">★</span><span class="m">DEZ</span><span class="wd">Data a definir</span></div>
-          <div class="ag-body">
+        <li class="ag">
+          <div class="ag-date tbd"><span class="d">Em breve</span><span class="m">Dezembro</span><span class="wd">Data a definir</span></div>
+          <div>
             <p class="ag-tag">The House</p>
-            <h3>Rosa <em>dos Ventos</em></h3>
+            <h3>Rosa dos Ventos</h3>
             <p class="ag-info">Mais informações em breve</p>
           </div>
-          <img class="ag-img" src="img/ag-thehouse.jpg" alt="Logo do The House" width="360" height="480" loading="lazy">
+          <img src="img/ag-thehouse.jpg" alt="Logo do The House" width="360" height="480" loading="lazy">
         </li>
-        <li class="ag-item">
-          <div class="ag-date"><span class="d">★</span><span class="m">DEZ</span><span class="wd">Data a definir</span></div>
-          <div class="ag-body">
+        <li class="ag">
+          <div class="ag-date tbd"><span class="d">Em breve</span><span class="m">Dezembro</span><span class="wd">Data a definir</span></div>
+          <div>
             <p class="ag-tag">Move Social</p>
-            <h3>Orfanato <em>Santa Bárbara</em></h3>
-            <p class="ag-info">Vila de Cava · mais informações em breve</p>
+            <h3>Orfanato Santa Bárbara</h3>
+            <p class="ag-info">Vila de Cava, mais informações em breve</p>
           </div>
-          <img class="ag-img" src="img/ag-santa-barbara.jpg" alt="Logo da Fundação Santa Bárbara" width="360" height="480" loading="lazy">
+          <img src="img/ag-santa-barbara.jpg" alt="Logo da Fundação Santa Bárbara" width="360" height="480" loading="lazy">
         </li>
       </ul>
-      <p class="note">★ Datas a definir. Fique de olho nos nossos avisos.</p>
     </div>
   </section>
 
-  <section id="move-social" class="social-sec">
+  <section id="move-social" class="social band">
     <div class="wrap">
-      <div class="logo-wrap">
-        <img class="social-logo logo-light" src="img/movesocial_v_claro.png" alt="Move Social · Ações sociais do Mover dos Filhos">
-        <img class="social-logo logo-dark" src="img/movesocial_v_escuro.png" alt="Move Social · Ações sociais do Mover dos Filhos">
-      </div>
+      <img class="social-logo" src="img/movesocial_v_escuro.png" alt="Move Social, ações sociais do Mover dos Filhos">
       <div>
-        <p class="eyebrow">Move Social · um braço do Mover dos Filhos</p>
-        <h2>Aquilo que recebemos, <em>levamos.</em></h2>
+        <p class="kicker">Move Social, um braço do Mover dos Filhos</p>
+        <h2 class="h2">Aquilo que recebemos, levamos.</h2>
         <div class="text">
-          <p>O Move Social é o braço de ações sociais do Mover dos Filhos. É o amor que recebemos de Deus se transformando em cuidado prático com quem precisa.</p>
+          <p class="lede" style="color:var(--cream)">O Move Social é o braço de ações sociais do Mover dos Filhos. É o amor que recebemos de Deus se transformando em cuidado prático com quem precisa.</p>
           <p>Visitas, doações e momentos de presença junto a instituições e famílias, para servir com as mãos o que vivemos no altar.</p>
         </div>
         <div class="action">
           <img src="img/santa-barbara.jpg" alt="Logo da Fundação Santa Bárbara">
           <div>
-            <span class="when">Dezembro · data a definir</span>
+            <span class="when">Dezembro, data a definir</span>
             <h3>Orfanato Santa Bárbara</h3>
-            <p>Vila de Cava · em breve mais informações</p>
+            <p>Vila de Cava, em breve mais informações</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="move-store" class="store">
+  <section id="move-store" class="paper-2 band">
     <div class="wrap">
       <div class="store-head">
         <div>
@@ -715,59 +623,59 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
         </div>
         <div>
           <span class="soon">Em breve</span>
-          <h2>Em breve teremos a <em>Move Store</em></h2>
-          <p class="sub">Camisetas e bonés com a identidade do Mover dos Filhos, para levar a mensagem por onde você for. Veja algumas das peças que estão chegando.</p>
+          <h2 class="h2" style="margin-top:12px">A Move Store está chegando</h2>
+          <p class="muted">Camisetas e bonés com a identidade do Mover dos Filhos, para levar a mensagem por onde você for. Veja algumas das peças que estão chegando.</p>
         </div>
       </div>
       <div class="products">
         <figure class="product">
-          <div class="pic"><img src="img/camiseta-marrom.jpg" alt="Camiseta marrom com estampa de coração e cruz vermelha e o nome Mover dos Filhos nas costas" loading="lazy"><span class="soon">Em breve</span></div>
-          <figcaption><strong>Coração e Cruz</strong><span>Camiseta marrom</span></figcaption>
+          <div class="pic"><img src="img/camiseta-marrom.jpg" alt="Camiseta marrom com estampa de coração e cruz vermelha e o nome Mover dos Filhos nas costas" loading="lazy"></div>
+          <figcaption><strong>Coração e Cruz</strong><span class="k">Camiseta marrom</span></figcaption>
         </figure>
         <figure class="product">
-          <div class="pic"><img src="img/camiseta-preta.jpg" alt="Camiseta preta com estampa de Jesus protegendo um cordeiro dos lobos e o nome Mover dos Filhos" loading="lazy"><span class="soon">Em breve</span></div>
-          <figcaption><strong>O Bom Pastor</strong><span>Camiseta preta</span></figcaption>
+          <div class="pic"><img src="img/camiseta-preta.jpg" alt="Camiseta preta com estampa de Jesus protegendo um cordeiro dos lobos e o nome Mover dos Filhos" loading="lazy"></div>
+          <figcaption><strong>O Bom Pastor</strong><span class="k">Camiseta preta</span></figcaption>
         </figure>
         <figure class="product">
-          <div class="pic"><img src="img/camiseta-vinho.jpg" alt="Camiseta vinho com estampa de leão e a frase Move of the Children" loading="lazy"><span class="soon">Em breve</span></div>
-          <figcaption><strong>Move of the Children</strong><span>Camiseta vinho</span></figcaption>
+          <div class="pic"><img src="img/camiseta-vinho.jpg" alt="Camiseta vinho com estampa de leão e a frase Move of the Children" loading="lazy"></div>
+          <figcaption><strong>Move of the Children</strong><span class="k">Camiseta vinho</span></figcaption>
         </figure>
         <figure class="product">
-          <div class="pic" style="background:#d4d4d4"><img src="img/bones.jpg" alt="Bonés preto e branco com os logos do Mover dos Filhos e da Move Store" loading="lazy" style="object-fit:contain"><span class="soon">Em breve</span></div>
-          <figcaption><strong>Bonés</strong><span>Preto e branco</span></figcaption>
+          <div class="pic" style="background:#d4d4d4"><img src="img/bones.jpg" alt="Bonés preto e branco com os logos do Mover dos Filhos e da Move Store" loading="lazy" style="object-fit:contain"></div>
+          <figcaption><strong>Bonés</strong><span class="k">Preto e branco</span></figcaption>
         </figure>
       </div>
-      <p class="follow">Fique de olho no lançamento: <b>@movestore</b></p>
+      <p class="follow">Acompanhe o lançamento em <b>@movestore</b>.</p>
     </div>
   </section>
 
-  <section class="verse">
+  <section id="contato" class="night band">
     <div class="wrap">
-      <blockquote>Buscai ao Senhor enquanto se pode achar; invocai-o enquanto está perto.</blockquote>
-      <cite>ISAÍAS 55:6</cite>
-    </div>
-  </section>
-
-  <section id="contato" class="connect">
-    <div class="wrap">
-      <p class="eyebrow">Caminhe com a gente</p>
-      <h2>Leve o mover <em>para a sua casa</em></h2>
-      <p class="sub">Siga o Mover dos Filhos para acompanhar os próximos encontros, ou fale com a gente para receber um The House na sua casa.</p>
-      <div class="links">
-        <div class="link-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor"/></svg>
-          <strong>Instagram</strong><span>Em breve</span>
-        </div>
-        <div class="link-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 10h8M8 13.5h5"/><path d="M4 19.5 5.3 16A8 8 0 1 1 8 18.8z" stroke-linejoin="round"/></svg>
-          <strong>WhatsApp</strong><span>Em breve</span>
-        </div>
-        <div class="link-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3.5"/><path d="m10.5 9.5 4 2.5-4 2.5z" fill="currentColor"/></svg>
-          <strong>YouTube</strong><span>Em breve</span>
-        </div>
+      <div class="verse">
+        <blockquote>“Buscai ao Senhor enquanto se pode achar; invocai-o enquanto está perto.”</blockquote>
+        <cite>Isaías 55:6</cite>
       </div>
-      <div class="manifesto">Não é uma igreja.<br><b>É um movimento.</b></div>
+      <div class="connect">
+        <div>
+          <p class="kicker">Caminhe com a gente</p>
+          <h2 class="h2">Leve o mover para a sua casa</h2>
+          <p class="muted">Siga o Mover dos Filhos para acompanhar os próximos encontros, ou fale com a gente para receber um The House na sua casa.</p>
+        </div>
+        <ul class="links">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor"/></svg>
+            <strong>Instagram</strong><span>Em breve</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 10h8M8 13.5h5"/><path d="M4 19.5 5.3 16A8 8 0 1 1 8 18.8z" stroke-linejoin="round"/></svg>
+            <strong>WhatsApp</strong><span>Em breve</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3.5"/><path d="m10.5 9.5 4 2.5-4 2.5z" fill="currentColor"/></svg>
+            <strong>YouTube</strong><span>Em breve</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 </main>
@@ -775,9 +683,8 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
 <footer>
   <div class="wrap">
     <div class="brand">
-      <img class="logo-light" src="img/mover_claro.png" alt="Mover dos Filhos">
-      <img class="logo-dark" src="img/mover_escuro.png" alt="Mover dos Filhos">
-      <div><small>Mover dos Filhos</small>The House é um braço do Mover dos Filhos.</div>
+      <img src="img/mover_escuro.png" alt="Mover dos Filhos">
+      <div><strong>Não é uma igreja. É um movimento.</strong>The House, Move Social e Move Store são braços do Mover dos Filhos.</div>
     </div>
     <span>Vamos juntos buscar e ver Deus se manifestar na sua casa.</span>
   </div>
@@ -791,6 +698,20 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
 </button>
 
 <script>
+  // Menu no celular
+  (function () {
+    var btn = document.getElementById("menu-btn"), nav = document.getElementById("menu");
+    if (!btn || !nav) return;
+    btn.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "Fechar" : "Menu";
+    });
+    nav.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") { nav.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); btn.textContent = "Menu"; }
+    });
+  })();
+
   // Música de fundo: só toca quando a pessoa pede (navegadores bloqueiam som automático).
   (function () {
     var audio = document.getElementById("trilha");
@@ -821,26 +742,6 @@ footer .brand small { display: block; font-size: 12px; letter-spacing: 0.16em; t
     function pause() { fadeTo(0, function () { audio.pause(); }); setUi(false); }
     btn.addEventListener("click", function () { if (audio.paused || !btn.classList.contains("playing")) play(); else pause(); });
     if (video) video.addEventListener("play", function () { if (!audio.paused) pause(); });
-  })();
-
-  (function () {
-    var btn = document.getElementById("copiar");
-    var addr = document.getElementById("endereco");
-    if (!btn || !addr) return;
-    btn.addEventListener("click", function () {
-      var text = addr.textContent.trim();
-      function selectFallback() {
-        var r = document.createRange(); r.selectNodeContents(addr);
-        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        btn.textContent = "Selecionado — copie com Ctrl+C";
-      }
-      try {
-        navigator.clipboard.writeText(text).then(function () {
-          btn.textContent = "Endereço copiado";
-          setTimeout(function () { btn.textContent = "Copiar endereço"; }, 2200);
-        }, selectFallback);
-      } catch (e) { selectFallback(); }
-    });
   })();
 </script>
 
