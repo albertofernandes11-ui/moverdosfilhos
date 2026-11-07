@@ -9,7 +9,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
 BASE = Path(__file__).parent
-SRC = BASE / "originais"
+SRC = BASE / "limpas"   # fotos já sem a marca "Galaxy A54 5G" (limpar_marca.py)
 S = 2                                   # escala de trabalho
 W, H = 1080 * S, 1920 * S
 SIDE, GAP, TOP, BOTTOM, R = 36 * S, 22 * S, 190 * S, 230 * S, 22 * S
@@ -18,8 +18,8 @@ BG, GOLD = (24, 20, 14), (214, 178, 102)
 # (arquivo, foco x, foco y) para o recorte: onde estão os rostos/corpo
 GRID = [
     ("foto-1.jpg", 0.42, 0.55), ("foto-2.jpg", 0.47, 0.60),
-    ("foto-4.jpg", 0.60, 0.55), ("foto-3.jpg", 0.55, 0.55),
-    ("foto-5.jpg", 0.61, 0.55), ("foto-6.jpg", 0.61, 0.55),
+    ("foto-4.jpg", 0.56, 0.55), ("foto-3.jpg", 0.55, 0.55),
+    ("foto-5.jpg", 0.57, 0.55), ("foto-6.jpg", 0.56, 0.55),
 ]
 
 cw = (W - 2 * SIDE - GAP) // 2
@@ -37,17 +37,6 @@ def crop_fill(img, fx, fy, w, h):
     return img.crop((x, y, x + cw_, y + ch_)).resize((w, h), Image.LANCZOS)
 
 
-def limpa_marca(img, f):
-    """Cobre o texto "Galaxy A54 5G" da foto-2 com o piso logo abaixo dele."""
-    if f != "foto-2.jpg":
-        return img
-    patch = img.crop((60, 1530, 340, 1595))
-    m = Image.new("L", patch.size, 0)
-    ImageDraw.Draw(m).rectangle((8, 8, patch.width - 9, patch.height - 9), fill=255)
-    img.paste(patch, (60, 1460), m.filter(ImageFilter.GaussianBlur(5)))
-    return img
-
-
 def hd(img):
     img = img.filter(ImageFilter.UnsharpMask(radius=2.2, percent=70, threshold=2))
     img = ImageEnhance.Contrast(img).enhance(1.06)
@@ -61,7 +50,7 @@ ImageDraw.Draw(mask).rounded_rectangle((0, 0, cw, ch), R, fill=255)
 for i, (f, fx, fy) in enumerate(GRID):
     col, row = i % 2, i // 2
     x, y = SIDE + col * (cw + GAP), TOP + row * (ch + GAP)
-    img = hd(crop_fill(limpa_marca(Image.open(SRC / f).convert("RGB"), f), fx, fy, cw, ch))
+    img = hd(crop_fill(Image.open(SRC / f).convert("RGB"), fx, fy, cw, ch))
     d.rounded_rectangle((x - 3 * S, y - 3 * S, x + cw + 3 * S - 1, y + ch + 3 * S - 1), R + 3 * S, fill=GOLD)
     canvas.paste(img, (x, y), mask)
 

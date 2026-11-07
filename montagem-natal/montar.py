@@ -9,7 +9,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
 BASE = Path(__file__).parent
-SRC = BASE / "originais"
+SRC = BASE / "limpas"   # fotos já sem a marca "Galaxy A54 5G" (limpar_marca.py)
 
 M, G, R = 80, 40, 28           # margem, espaço entre fotos, raio dos cantos
 CELL_W = 1600                   # largura de cada foto
